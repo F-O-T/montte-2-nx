@@ -1,0 +1,40 @@
+{
+  "name": "@core/logging",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./otel": {
+      "types": "./dist/otel.d.ts",
+      "default": "./dist/otel.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "check-types": "tsc --build --emitDeclarationOnly",
+    "lint": "oxlint -c ../../tooling/oxc/oxlintrc.core.json",
+    "format": "oxfmt --write src"
+  },
+  "dependencies": {
+    "@core/env": "workspace:*",
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/api-logs": "^0.57.0",
+    "@opentelemetry/exporter-logs-otlp-http": "^0.57.0",
+    "@opentelemetry/resources": "^1.30.0",
+    "@opentelemetry/sdk-logs": "^0.57.0",
+    "@opentelemetry/sdk-node": "^0.57.0",
+    "@opentelemetry/semantic-conventions": "^1.28.0",
+    "@orpc/otel": "latest",
+    "pino": "^9.6.0",
+    "pino-opentelemetry-transport": "^0.6.0"
+  },
+  "devDependencies": {
+    "@tooling/config": "workspace:*",
+    "@types/node": "catalog:",
+    "typescript": "^5"
+  }
+}
