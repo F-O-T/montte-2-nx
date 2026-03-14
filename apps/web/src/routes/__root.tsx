@@ -4,12 +4,14 @@ import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanst
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { Toaster } from "@packages/ui/components/sonner";
 
+import { m } from "@/paraglide/messages";
 import { getLocale } from "@/paraglide/runtime";
 import type { orpc } from "@/utils/orpc";
 
 import Header from "../components/header";
+import { ThemeProvider, ThemeScript } from "../components/theme-provider";
 
-import appCss from "../index.css?url";
+import appCss from "@tooling/css/globals.css?url";
 export interface RouterAppContext {
   orpc: typeof orpc;
   queryClient: QueryClient;
@@ -26,7 +28,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "My App",
+        title: m.app_title(),
       },
     ],
     links: [
@@ -42,16 +44,19 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 
 function RootDocument() {
   return (
-    <html lang={getLocale()} className="dark">
+    <html lang={getLocale()} suppressHydrationWarning>
       <head>
         <HeadContent />
+        <ThemeScript />
       </head>
       <body>
-        <div className="grid h-svh grid-rows-[auto_1fr]">
-          <Header />
-          <Outlet />
-        </div>
-        <Toaster richColors />
+        <ThemeProvider>
+          <div className="grid h-svh grid-rows-[auto_1fr]">
+            <Header />
+            <Outlet />
+          </div>
+          <Toaster richColors />
+        </ThemeProvider>
         <TanStackRouterDevtools position="bottom-left" />
         <ReactQueryDevtools position="bottom" buttonPosition="bottom-right" />
         <Scripts />

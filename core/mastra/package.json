@@ -14,7 +14,7 @@
   "scripts": {
     "build": "tsc --build",
     "check-types": "tsc --build --emitDeclarationOnly",
-    "dev": "mastra dev",
+    "dev": "dotenv -e ../../apps/web/.env -- mastra dev",
     "lint": "oxlint -c ../../tooling/oxc/oxlintrc.core.json",
     "format": "oxfmt --write src"
   },

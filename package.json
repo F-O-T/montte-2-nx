@@ -59,6 +59,7 @@
     "@nx/vite": "^22.5.4",
     "@tooling/config": "workspace:*",
     "@types/node": "catalog:",
+    "dotenv-cli": "^11.0.0",
     "lefthook": "^2.0.13",
     "nx": "^21.5.2",
     "oxfmt": "^0.26.0",

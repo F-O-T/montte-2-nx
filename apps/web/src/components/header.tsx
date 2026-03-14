@@ -1,11 +1,13 @@
 import { Link } from "@tanstack/react-router";
 
+import { m } from "@/paraglide/messages";
+
 import UserMenu from "./user-menu";
 
 export default function Header() {
   const links = [
-    { to: "/", label: "Home" },
-    { to: "/dashboard", label: "Dashboard" },
+    { to: "/", label: m.home() },
+    { to: "/dashboard", label: m.dashboard() },
   ] as const;
 
   return (
