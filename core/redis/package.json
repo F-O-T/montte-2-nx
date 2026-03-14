@@ -1,32 +1,27 @@
 {
-  "name": "@core/mastra",
+  "name": "@core/redis",
+  "version": "0.0.0",
+  "private": true,
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.js"
     }
   },
   "scripts": {
     "build": "tsc --build",
     "check-types": "tsc --build --emitDeclarationOnly",
-    "dev": "mastra dev",
     "lint": "oxlint -c ../../tooling/oxc/oxlintrc.core.json",
     "format": "oxfmt --write src"
   },
   "dependencies": {
     "@core/env": "workspace:*",
-    "@mastra/core": "latest",
-    "@mastra/posthog": "latest",
-    "zod": "catalog:"
+    "ioredis": "^5.6.1"
   },
   "devDependencies": {
     "@tooling/config": "workspace:*",
-    "mastra": "latest",
+    "@types/node": "catalog:",
     "typescript": "^5"
   }
 }

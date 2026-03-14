@@ -4,6 +4,7 @@ import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanst
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { Toaster } from "@packages/ui/components/sonner";
 
+import { getLocale } from "@/paraglide/runtime";
 import type { orpc } from "@/utils/orpc";
 
 import Header from "../components/header";
@@ -41,7 +42,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
 
 function RootDocument() {
   return (
-    <html lang="en" className="dark">
+    <html lang={getLocale()} className="dark">
       <head>
         <HeadContent />
       </head>

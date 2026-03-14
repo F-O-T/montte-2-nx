@@ -11,6 +11,9 @@
 # Testing
 /coverage
 
+# Paraglide (auto-generated)
+src/paraglide/
+
 # Build outputs
 /.next/
 /out/

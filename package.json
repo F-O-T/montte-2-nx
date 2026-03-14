@@ -54,6 +54,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@inlang/paraglide-js": "^2.15.0",
     "@nx/js": "^22.5.4",
     "@nx/vite": "^22.5.4",
     "@tooling/config": "workspace:*",

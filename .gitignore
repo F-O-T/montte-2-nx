@@ -2,6 +2,9 @@
 node_modules
 .pnp
 .pnp.js
+.mastra
+# Paraglide (auto-generated)
+**/paraglide/
 
 # Build outputs
 dist
