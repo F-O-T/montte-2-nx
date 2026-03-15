@@ -1,6 +1,7 @@
 {
   "name": "working-app",
   "private": true,
+  "license": "MIT",
   "workspaces": {
     "packages": [
       "apps/*",
