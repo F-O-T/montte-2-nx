@@ -8,7 +8,6 @@ import { m } from "@/paraglide/messages";
 import { getLocale } from "@/paraglide/runtime";
 import type { orpc } from "@/utils/orpc";
 
-import Header from "../components/header";
 import { ThemeProvider, ThemeScript } from "../components/theme-provider";
 
 import appCss from "@tooling/css/globals.css?url";
@@ -51,8 +50,7 @@ function RootDocument() {
       </head>
       <body>
         <ThemeProvider>
-          <div className="grid h-svh grid-rows-[auto_1fr]">
-            <Header />
+          <div className="flex h-svh flex-col">
             <Outlet />
           </div>
           <Toaster richColors />

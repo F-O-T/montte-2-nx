@@ -71,7 +71,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@packages/ui/components/dropdown-menu"
-import { NativeSelect, NativeSelectOption } from "@packages/ui/components/native-select"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@packages/ui/components/select"
 
 // ── Select checkbox column ────────────────────────────────────────────
 
@@ -336,17 +342,21 @@ function DataTablePagination<TData>({
       <div className="flex items-center gap-6">
         <div className="flex items-center gap-2">
           <span className="text-sm text-muted-foreground">Rows per page</span>
-          <NativeSelect
-            size="sm"
+          <Select
             value={String(table.getState().pagination.pageSize)}
-            onChange={(e) => table.setPageSize(Number(e.target.value))}
+            onValueChange={(value) => table.setPageSize(Number(value))}
           >
-            {pageSizeOptions.map((size) => (
-              <NativeSelectOption key={size} value={String(size)}>
-                {size}
-              </NativeSelectOption>
-            ))}
-          </NativeSelect>
+            <SelectTrigger size="sm">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {pageSizeOptions.map((size) => (
+                <SelectItem key={size} value={String(size)}>
+                  {size}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <div className="text-sm text-muted-foreground">
           Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}

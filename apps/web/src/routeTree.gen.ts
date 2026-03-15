@@ -12,7 +12,17 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DatatableDemoRouteImport } from './routes/datatable-demo'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
+import { Route as AuthSignUpRouteImport } from './routes/auth/sign-up'
+import { Route as AuthSignInRouteImport } from './routes/auth/sign-in'
+import { Route as AuthMagicLinkRouteImport } from './routes/auth/magic-link'
+import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
+import { Route as AuthEmailVerificationRouteImport } from './routes/auth/email-verification'
+import { Route as AuthCallbackRouteImport } from './routes/auth/callback'
+import { Route as AuthSignInIndexRouteImport } from './routes/auth/sign-in/index'
+import { Route as AuthSignInEmailRouteImport } from './routes/auth/sign-in/email'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc/$'
 import { Route as ApiChatSplatRouteImport } from './routes/api/chat/$'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
@@ -32,10 +42,60 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const AuthSignUpRoute = AuthSignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthSignInRoute = AuthSignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthMagicLinkRoute = AuthMagicLinkRouteImport.update({
+  id: '/magic-link',
+  path: '/magic-link',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthEmailVerificationRoute = AuthEmailVerificationRouteImport.update({
+  id: '/email-verification',
+  path: '/email-verification',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/callback',
+  path: '/callback',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthSignInIndexRoute = AuthSignInIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthSignInRoute,
+} as any)
+const AuthSignInEmailRoute = AuthSignInEmailRouteImport.update({
+  id: '/email',
+  path: '/email',
+  getParentRoute: () => AuthSignInRoute,
 } as any)
 const ApiRpcSplatRoute = ApiRpcSplatRouteImport.update({
   id: '/api/rpc/$',
@@ -55,65 +115,122 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/dashboard': typeof DashboardRouteWithChildren
   '/datatable-demo': typeof DatatableDemoRoute
   '/login': typeof LoginRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/auth/email-verification': typeof AuthEmailVerificationRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/magic-link': typeof AuthMagicLinkRoute
+  '/auth/sign-in': typeof AuthSignInRouteWithChildren
+  '/auth/sign-up': typeof AuthSignUpRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/chat/$': typeof ApiChatSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/auth/sign-in/email': typeof AuthSignInEmailRoute
+  '/auth/sign-in/': typeof AuthSignInIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/auth': typeof AuthRouteWithChildren
   '/datatable-demo': typeof DatatableDemoRoute
   '/login': typeof LoginRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/auth/email-verification': typeof AuthEmailVerificationRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/magic-link': typeof AuthMagicLinkRoute
+  '/auth/sign-up': typeof AuthSignUpRoute
+  '/dashboard': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/chat/$': typeof ApiChatSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/auth/sign-in/email': typeof AuthSignInEmailRoute
+  '/auth/sign-in': typeof AuthSignInIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/dashboard': typeof DashboardRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/dashboard': typeof DashboardRouteWithChildren
   '/datatable-demo': typeof DatatableDemoRoute
   '/login': typeof LoginRoute
+  '/auth/callback': typeof AuthCallbackRoute
+  '/auth/email-verification': typeof AuthEmailVerificationRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/magic-link': typeof AuthMagicLinkRoute
+  '/auth/sign-in': typeof AuthSignInRouteWithChildren
+  '/auth/sign-up': typeof AuthSignUpRoute
+  '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/api/chat/$': typeof ApiChatSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
+  '/auth/sign-in/email': typeof AuthSignInEmailRoute
+  '/auth/sign-in/': typeof AuthSignInIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/dashboard'
     | '/datatable-demo'
     | '/login'
+    | '/auth/callback'
+    | '/auth/email-verification'
+    | '/auth/forgot-password'
+    | '/auth/magic-link'
+    | '/auth/sign-in'
+    | '/auth/sign-up'
+    | '/dashboard/'
     | '/api/auth/$'
     | '/api/chat/$'
     | '/api/rpc/$'
+    | '/auth/sign-in/email'
+    | '/auth/sign-in/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/dashboard'
+    | '/auth'
     | '/datatable-demo'
     | '/login'
+    | '/auth/callback'
+    | '/auth/email-verification'
+    | '/auth/forgot-password'
+    | '/auth/magic-link'
+    | '/auth/sign-up'
+    | '/dashboard'
     | '/api/auth/$'
     | '/api/chat/$'
     | '/api/rpc/$'
+    | '/auth/sign-in/email'
+    | '/auth/sign-in'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/dashboard'
     | '/datatable-demo'
     | '/login'
+    | '/auth/callback'
+    | '/auth/email-verification'
+    | '/auth/forgot-password'
+    | '/auth/magic-link'
+    | '/auth/sign-in'
+    | '/auth/sign-up'
+    | '/dashboard/'
     | '/api/auth/$'
     | '/api/chat/$'
     | '/api/rpc/$'
+    | '/auth/sign-in/email'
+    | '/auth/sign-in/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DashboardRoute: typeof DashboardRoute
+  AuthRoute: typeof AuthRouteWithChildren
+  DashboardRoute: typeof DashboardRouteWithChildren
   DatatableDemoRoute: typeof DatatableDemoRoute
   LoginRoute: typeof LoginRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
@@ -144,12 +261,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/auth/sign-up': {
+      id: '/auth/sign-up'
+      path: '/sign-up'
+      fullPath: '/auth/sign-up'
+      preLoaderRoute: typeof AuthSignUpRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/sign-in': {
+      id: '/auth/sign-in'
+      path: '/sign-in'
+      fullPath: '/auth/sign-in'
+      preLoaderRoute: typeof AuthSignInRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/magic-link': {
+      id: '/auth/magic-link'
+      path: '/magic-link'
+      fullPath: '/auth/magic-link'
+      preLoaderRoute: typeof AuthMagicLinkRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/forgot-password': {
+      id: '/auth/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/auth/forgot-password'
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/email-verification': {
+      id: '/auth/email-verification'
+      path: '/email-verification'
+      fullPath: '/auth/email-verification'
+      preLoaderRoute: typeof AuthEmailVerificationRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/sign-in/': {
+      id: '/auth/sign-in/'
+      path: '/'
+      fullPath: '/auth/sign-in/'
+      preLoaderRoute: typeof AuthSignInIndexRouteImport
+      parentRoute: typeof AuthSignInRoute
+    }
+    '/auth/sign-in/email': {
+      id: '/auth/sign-in/email'
+      path: '/email'
+      fullPath: '/auth/sign-in/email'
+      preLoaderRoute: typeof AuthSignInEmailRouteImport
+      parentRoute: typeof AuthSignInRoute
     }
     '/api/rpc/$': {
       id: '/api/rpc/$'
@@ -175,9 +362,56 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthSignInRouteChildren {
+  AuthSignInEmailRoute: typeof AuthSignInEmailRoute
+  AuthSignInIndexRoute: typeof AuthSignInIndexRoute
+}
+
+const AuthSignInRouteChildren: AuthSignInRouteChildren = {
+  AuthSignInEmailRoute: AuthSignInEmailRoute,
+  AuthSignInIndexRoute: AuthSignInIndexRoute,
+}
+
+const AuthSignInRouteWithChildren = AuthSignInRoute._addFileChildren(
+  AuthSignInRouteChildren,
+)
+
+interface AuthRouteChildren {
+  AuthCallbackRoute: typeof AuthCallbackRoute
+  AuthEmailVerificationRoute: typeof AuthEmailVerificationRoute
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
+  AuthMagicLinkRoute: typeof AuthMagicLinkRoute
+  AuthSignInRoute: typeof AuthSignInRouteWithChildren
+  AuthSignUpRoute: typeof AuthSignUpRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthCallbackRoute: AuthCallbackRoute,
+  AuthEmailVerificationRoute: AuthEmailVerificationRoute,
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
+  AuthMagicLinkRoute: AuthMagicLinkRoute,
+  AuthSignInRoute: AuthSignInRouteWithChildren,
+  AuthSignUpRoute: AuthSignUpRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
+interface DashboardRouteChildren {
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardRoute: DashboardRoute,
+  AuthRoute: AuthRouteWithChildren,
+  DashboardRoute: DashboardRouteWithChildren,
   DatatableDemoRoute: DatatableDemoRoute,
   LoginRoute: LoginRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
