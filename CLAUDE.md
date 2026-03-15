@@ -11,6 +11,8 @@ This is a monorepo managed with Nx.
 - Put shared product-facing code in `packages/*`.
 - Put platform and infrastructure code in `core/*`.
 - Put repo-wide tooling, configuration, and guardrails in `tooling/*`.
+- Default to project-level `__tests__` directories for apps/packages/core projects, and keep tests owned by the relevant project instead of placing them under `src` unless that project already has an established `src`-based testing convention.
+- Projects with tests should also define a dedicated test tsconfig, preferably `tsconfig.spec.json` (or `tsconfig.test.json` if that project already uses it), including `src`, `__tests__`, and test config files when present.
 
 ## Primary stack
 
@@ -100,3 +102,4 @@ This repository uses Paraglide for localization in `apps/web`.
 
 - Do not add comments to the code.
 - Keep code explicit, maintainable, and aligned with existing repository patterns.
+- Prefer path alias imports over relative imports when an alias exists. Use workspace aliases such as `@core/auth/*`, `@packages/ui/*`, and app aliases such as `@/*` instead of long relative paths.

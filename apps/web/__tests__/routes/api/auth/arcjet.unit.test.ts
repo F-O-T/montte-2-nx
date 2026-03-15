@@ -4,7 +4,7 @@ import {
   createArcjetDeniedResponse,
   protectBetterAuthRequest,
   shouldProtectBetterAuthRequest,
-} from '../arcjet';
+} from '../../../../src/routes/api/auth/arcjet';
 
 function createDecision(options?: {
   denied?: boolean;
@@ -99,7 +99,7 @@ describe('protectBetterAuthRequest', () => {
     });
 
     const response = await protectBetterAuthRequest(request, {
-      getArcjetRequest: (currentRequest) => currentRequest,
+      getArcjetRequest: (currentRequest: Request) => currentRequest,
       magicLinkProtector: { protect: vi.fn() },
       signupProtector: { protect: signupProtect },
     });
@@ -122,7 +122,7 @@ describe('protectBetterAuthRequest', () => {
     );
 
     const response = await protectBetterAuthRequest(request, {
-      getArcjetRequest: (currentRequest) => currentRequest,
+      getArcjetRequest: (currentRequest: Request) => currentRequest,
       magicLinkProtector: { protect: magicLinkProtect },
       signupProtector: { protect: vi.fn() },
     });
@@ -141,7 +141,7 @@ describe('protectBetterAuthRequest', () => {
     });
 
     const response = await protectBetterAuthRequest(request, {
-      getArcjetRequest: (currentRequest) => currentRequest,
+      getArcjetRequest: (currentRequest: Request) => currentRequest,
       magicLinkProtector: { protect: vi.fn() },
       signupProtector: { protect: vi.fn() },
     });
