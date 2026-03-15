@@ -1,4 +1,18 @@
 {
   "name": "@core/auth",
-  "tags": ["layer:core"]
+  "tags": ["layer:core"],
+  "targets": {
+    "test:unit": {
+      "executor": "@nx/vitest:test",
+      "options": {
+        "config": "core/auth/vitest.config.ts"
+      }
+    },
+    "test:integration": {
+      "executor": "@nx/vitest:test",
+      "options": {
+        "config": "core/auth/vitest.integration.config.ts"
+      }
+    }
+  }
 }

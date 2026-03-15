@@ -1,4 +1,18 @@
 {
   "name": "@packages/api",
-  "tags": ["layer:packages"]
+  "tags": ["layer:packages"],
+  "targets": {
+    "test:unit": {
+      "executor": "@nx/vitest:test",
+      "options": {
+        "config": "packages/api/vitest.config.ts"
+      }
+    },
+    "test:integration": {
+      "executor": "@nx/vitest:test",
+      "options": {
+        "config": "packages/api/vitest.integration.config.ts"
+      }
+    }
+  }
 }

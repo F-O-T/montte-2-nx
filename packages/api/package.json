@@ -1,5 +1,6 @@
 {
   "name": "@packages/api",
+  "private": true,
   "type": "module",
   "exports": {
     ".": {
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@tooling/config": "workspace:*",
+    "@tooling/test": "workspace:*",
     "typescript": "^5"
   }
 }

@@ -1,33 +1,33 @@
 {
-  "name": "@core/mastra",
+  "name": "@tooling/test",
   "private": true,
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
     },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.js"
+    "./db": {
+      "types": "./src/db/index.ts",
+      "default": "./src/db/index.ts"
+    },
+    "./vitest": {
+      "types": "./src/vitest/index.ts",
+      "default": "./src/vitest/index.ts"
     }
   },
   "scripts": {
     "build": "tsc --build",
     "check-types": "tsc --build --emitDeclarationOnly",
-    "dev": "dotenv -e ../../apps/web/.env -- mastra dev",
     "lint": "oxlint -c ../../tooling/oxc/oxlintrc.core.json",
     "format": "oxfmt --write src"
   },
   "dependencies": {
-    "@core/env": "workspace:*",
-    "@mastra/core": "latest",
-    "@mastra/posthog": "latest",
-    "zod": "catalog:"
+    "@electric-sql/pglite": "^0.3.8",
+    "drizzle-orm": "^0.45.1"
   },
   "devDependencies": {
     "@tooling/config": "workspace:*",
-    "mastra": "latest",
     "typescript": "^5"
   }
 }

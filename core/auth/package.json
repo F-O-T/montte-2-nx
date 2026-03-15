@@ -1,5 +1,6 @@
 {
   "name": "@core/auth",
+  "private": true,
   "type": "module",
   "exports": {
     ".": {

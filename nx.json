@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "defaultBase": "master",
   "sync": {
     "applyChanges": true
   },
@@ -69,6 +70,14 @@
     },
     "format": {
       "cache": true
+    },
+    "test:unit": {
+      "cache": true,
+      "inputs": ["default", "^default"]
+    },
+    "test:integration": {
+      "cache": false,
+      "inputs": ["default", "^default"]
     },
     "check-boundaries": {
       "cache": true
