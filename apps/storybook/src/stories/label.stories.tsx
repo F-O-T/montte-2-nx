@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Label } from '@packages/ui/components/label';
-import { Input } from '@packages/ui/components/input';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Label } from "@packages/ui/components/label";
+import { Input } from "@packages/ui/components/input";
 
 const meta = {
-  title: 'Components/Label',
+  title: "Components/Label",
   component: Label,
   args: {
-    children: 'Email address',
+    children: "Email address",
   },
 } satisfies Meta<typeof Label>;
 

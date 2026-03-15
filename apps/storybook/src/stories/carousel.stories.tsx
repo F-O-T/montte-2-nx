@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
-} from '@packages/ui/components/carousel';
-import { Card, CardContent } from '@packages/ui/components/card';
+} from "@packages/ui/components/carousel";
+import { Card, CardContent } from "@packages/ui/components/card";
 
 const meta = {
-  title: 'Components/Carousel',
+  title: "Components/Carousel",
   component: Carousel,
 } satisfies Meta<typeof Carousel>;
 

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect } from 'storybook/test';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "storybook/test";
 import {
   Drawer,
   DrawerTrigger,
@@ -8,11 +8,11 @@ import {
   DrawerTitle,
   DrawerDescription,
   DrawerFooter,
-} from '@packages/ui/components/drawer';
-import { Button } from '@packages/ui/components/button';
+} from "@packages/ui/components/drawer";
+import { Button } from "@packages/ui/components/button";
 
 const meta = {
-  title: 'Components/Drawer',
+  title: "Components/Drawer",
   component: Drawer,
 } satisfies Meta<typeof Drawer>;
 
@@ -42,8 +42,10 @@ export const Default: Story = {
     </Drawer>
   ),
   play: async ({ canvas, userEvent }) => {
-    const trigger = canvas.getByRole('button', { name: 'Open Drawer' });
+    const trigger = canvas.getByRole("button", { name: "Open Drawer" });
     await userEvent.click(trigger);
-    await expect(document.querySelector('[data-slot="drawer-title"]')).toHaveTextContent('Move Goal');
+    await expect(document.querySelector('[data-slot="drawer-title"]')).toHaveTextContent(
+      "Move Goal",
+    );
   },
 };

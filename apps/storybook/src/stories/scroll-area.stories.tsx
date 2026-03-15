@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { ScrollArea, ScrollBar } from '@packages/ui/components/scroll-area';
+import type { Meta, StoryObj } from "@storybook/react";
+import { ScrollArea, ScrollBar } from "@packages/ui/components/scroll-area";
 
 const meta = {
-  title: 'Components/ScrollArea',
+  title: "Components/ScrollArea",
   component: ScrollArea,
 } satisfies Meta<typeof ScrollArea>;
 

@@ -23,101 +23,93 @@ type Layer = (typeof LAYERS)[number];
 
 // Each layer can depend on layers listed here
 const ALLOWED_DEPS: Record<Layer, Layer[]> = {
-	tooling: [],
-	core: ["tooling"],
-	libs: ["core", "tooling"],
-	packages: ["core", "tooling", "libs"],
-	apps: ["packages", "core", "tooling", "libs"],
+  tooling: [],
+  core: ["tooling"],
+  libs: ["core", "tooling"],
+  packages: ["core", "tooling", "libs"],
+  apps: ["packages", "core", "tooling", "libs"],
 };
 
 const SCOPES: Record<Layer, string> = {
-	tooling: "@tooling/",
-	core: "@core/",
-	libs: "@libs/",
-	packages: "@packages/",
-	apps: "@apps/",
+  tooling: "@tooling/",
+  core: "@core/",
+  libs: "@libs/",
+  packages: "@packages/",
+  apps: "@apps/",
 };
 
 function getLayerFromScope(dep: string): Layer | null {
-	for (const [layer, scope] of Object.entries(SCOPES)) {
-		if (dep.startsWith(scope)) return layer as Layer;
-	}
-	return null;
+  for (const [layer, scope] of Object.entries(SCOPES)) {
+    if (dep.startsWith(scope)) return layer as Layer;
+  }
+  return null;
 }
 
-async function getWorkspacePackages(): Promise<
-	{ name: string; dir: string; layer: Layer }[]
-> {
-	const packages: { name: string; dir: string; layer: Layer }[] = [];
+async function getWorkspacePackages(): Promise<{ name: string; dir: string; layer: Layer }[]> {
+  const packages: { name: string; dir: string; layer: Layer }[] = [];
 
-	for (const layer of LAYERS) {
-		const layerDir = join(ROOT, layer);
-		let entries: string[];
-		try {
-			entries = await readdir(layerDir);
-		} catch {
-			continue;
-		}
+  for (const layer of LAYERS) {
+    const layerDir = join(ROOT, layer);
+    let entries: string[];
+    try {
+      entries = await readdir(layerDir);
+    } catch {
+      continue;
+    }
 
-		for (const entry of entries) {
-			const pkgJsonPath = join(layerDir, entry, "package.json");
-			try {
-				const raw = await readFile(pkgJsonPath, "utf-8");
-				const pkg = JSON.parse(raw);
-				packages.push({ name: pkg.name, dir: join(layerDir, entry), layer });
-			} catch {
-				// not a package
-			}
-		}
-	}
+    for (const entry of entries) {
+      const pkgJsonPath = join(layerDir, entry, "package.json");
+      try {
+        const raw = await readFile(pkgJsonPath, "utf-8");
+        const pkg = JSON.parse(raw);
+        packages.push({ name: pkg.name, dir: join(layerDir, entry), layer });
+      } catch {
+        // not a package
+      }
+    }
+  }
 
-	return packages;
+  return packages;
 }
 
 async function checkBoundaries(): Promise<boolean> {
-	const packages = await getWorkspacePackages();
-	let hasViolations = false;
+  const packages = await getWorkspacePackages();
+  let hasViolations = false;
 
-	for (const pkg of packages) {
-		const pkgJsonPath = join(pkg.dir, "package.json");
-		const raw = await readFile(pkgJsonPath, "utf-8");
-		const pkgJson = JSON.parse(raw);
+  for (const pkg of packages) {
+    const pkgJsonPath = join(pkg.dir, "package.json");
+    const raw = await readFile(pkgJsonPath, "utf-8");
+    const pkgJson = JSON.parse(raw);
 
-		const allDeps = {
-			...(pkgJson.dependencies ?? {}),
-			...(pkgJson.devDependencies ?? {}),
-		};
+    const allDeps = {
+      ...pkgJson.dependencies,
+      ...pkgJson.devDependencies,
+    };
 
-		for (const dep of Object.keys(allDeps)) {
-			const depLayer = getLayerFromScope(dep);
-			if (!depLayer) continue; // external dependency
+    for (const dep of Object.keys(allDeps)) {
+      const depLayer = getLayerFromScope(dep);
+      if (!depLayer) continue; // external dependency
 
-			// Same layer is allowed
-			if (depLayer === pkg.layer) continue;
+      // Same layer is allowed
+      if (depLayer === pkg.layer) continue;
 
-			const allowed = ALLOWED_DEPS[pkg.layer];
-			if (!allowed.includes(depLayer)) {
-				const rel = relative(ROOT, pkgJsonPath);
-				console.error(
-					`❌ Boundary violation: ${pkg.name} (${pkg.layer}) → ${dep} (${depLayer})`,
-				);
-				console.error(
-					`   ${rel}: "${pkg.layer}" cannot depend on "${depLayer}"`,
-				);
-				console.error(
-					`   Allowed dependencies for "${pkg.layer}": [${allowed.join(", ")}]`,
-				);
-				console.error("");
-				hasViolations = true;
-			}
-		}
-	}
+      const allowed = ALLOWED_DEPS[pkg.layer];
+      if (!allowed.includes(depLayer)) {
+        const rel = relative(ROOT, pkgJsonPath);
+        console.error(`❌ Boundary violation: ${pkg.name} (${pkg.layer}) → ${dep} (${depLayer})`);
+        console.error(`   ${rel}: "${pkg.layer}" cannot depend on "${depLayer}"`);
+        console.error(`   Allowed dependencies for "${pkg.layer}": [${allowed.join(", ")}]`);
+        console.error("");
+        hasViolations = true;
+      }
+    }
+  }
 
-	if (!hasViolations) {
-		console.log("✅ All module boundaries are valid.");
-	}
+  if (!hasViolations) {
+    console.log("✅ All module boundaries are valid.");
+  }
 
-	return !hasViolations;
+  return !hasViolations;
 }
 
 const ok = await checkBoundaries();

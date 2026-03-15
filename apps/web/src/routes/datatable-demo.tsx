@@ -14,12 +14,48 @@ type Task = {
 
 const initialTasks: Task[] = [
   { id: "1", title: "Set up CI/CD pipeline", status: "done", priority: "high", assignee: "Alice" },
-  { id: "2", title: "Design landing page", status: "in-progress", priority: "medium", assignee: "Bob" },
-  { id: "3", title: "Write API documentation", status: "todo", priority: "low", assignee: "Charlie" },
-  { id: "4", title: "Fix authentication bug", status: "in-progress", priority: "high", assignee: "Alice" },
-  { id: "5", title: "Add dark mode support", status: "todo", priority: "medium", assignee: "Diana" },
-  { id: "6", title: "Optimize database queries", status: "todo", priority: "high", assignee: "Bob" },
-  { id: "7", title: "Create onboarding flow", status: "in-progress", priority: "medium", assignee: "Charlie" },
+  {
+    id: "2",
+    title: "Design landing page",
+    status: "in-progress",
+    priority: "medium",
+    assignee: "Bob",
+  },
+  {
+    id: "3",
+    title: "Write API documentation",
+    status: "todo",
+    priority: "low",
+    assignee: "Charlie",
+  },
+  {
+    id: "4",
+    title: "Fix authentication bug",
+    status: "in-progress",
+    priority: "high",
+    assignee: "Alice",
+  },
+  {
+    id: "5",
+    title: "Add dark mode support",
+    status: "todo",
+    priority: "medium",
+    assignee: "Diana",
+  },
+  {
+    id: "6",
+    title: "Optimize database queries",
+    status: "todo",
+    priority: "high",
+    assignee: "Bob",
+  },
+  {
+    id: "7",
+    title: "Create onboarding flow",
+    status: "in-progress",
+    priority: "medium",
+    assignee: "Charlie",
+  },
   { id: "8", title: "Set up error monitoring", status: "done", priority: "low", assignee: "Diana" },
 ];
 
@@ -71,16 +107,9 @@ function DataTableDemo() {
     <div className="container mx-auto py-10">
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Tasks</h1>
-        <p className="text-muted-foreground">
-          Drag and drop columns to reorder them.
-        </p>
+        <p className="text-muted-foreground">Drag and drop columns to reorder them.</p>
       </div>
-      <DataTable
-        columns={columns}
-        data={initialTasks}
-        getRowId={(row) => row.id}
-        reorderColumns
-      />
+      <DataTable columns={columns} data={initialTasks} getRowId={(row) => row.id} reorderColumns />
     </div>
   );
 }

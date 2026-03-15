@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Alert, AlertTitle, AlertDescription } from '@packages/ui/components/alert';
-import { AlertCircle, Info } from 'lucide-react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Alert, AlertTitle, AlertDescription } from "@packages/ui/components/alert";
+import { AlertCircle, Info } from "lucide-react";
 
 const meta = {
-  title: 'Components/Alert',
+  title: "Components/Alert",
   component: Alert,
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'destructive'],
+      control: "select",
+      options: ["default", "destructive"],
     },
   },
 } satisfies Meta<typeof Alert>;
@@ -21,9 +21,7 @@ export const Default: Story = {
     <Alert>
       <Info />
       <AlertTitle>Heads up!</AlertTitle>
-      <AlertDescription>
-        You can add components to your app using the CLI.
-      </AlertDescription>
+      <AlertDescription>You can add components to your app using the CLI.</AlertDescription>
     </Alert>
   ),
 };
@@ -33,9 +31,7 @@ export const Destructive: Story = {
     <Alert variant="destructive">
       <AlertCircle />
       <AlertTitle>Error</AlertTitle>
-      <AlertDescription>
-        Something went wrong. Please try again later.
-      </AlertDescription>
+      <AlertDescription>Something went wrong. Please try again later.</AlertDescription>
     </Alert>
   ),
 };

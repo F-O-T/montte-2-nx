@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupButton,
   InputGroupText,
-} from '@packages/ui/components/input-group';
-import { Search, Eye, Mail } from 'lucide-react';
+} from "@packages/ui/components/input-group";
+import { Search, Eye, Mail } from "lucide-react";
 
 const meta = {
-  title: 'Components/InputGroup',
+  title: "Components/InputGroup",
   component: InputGroup,
 } satisfies Meta<typeof InputGroup>;
 

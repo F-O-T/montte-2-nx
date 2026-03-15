@@ -1,8 +1,8 @@
-import { Mastra } from '@mastra/core';
-import { Observability } from '@mastra/observability';
-import { PosthogExporter } from '@mastra/posthog';
-import { env } from '@core/env';
-import { weatherAgent } from './agents/weather-agent';
+import { Mastra } from "@mastra/core";
+import { Observability } from "@mastra/observability";
+import { PosthogExporter } from "@mastra/posthog";
+import { env } from "@core/env";
+import { weatherAgent } from "./agents/weather-agent";
 
 export const mastra = new Mastra({
   agents: { weatherAgent },

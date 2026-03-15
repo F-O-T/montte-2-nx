@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect } from 'storybook/test';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "storybook/test";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from '@packages/ui/components/dropdown-menu';
-import { Button } from '@packages/ui/components/button';
-import { User, Settings, LogOut } from 'lucide-react';
+} from "@packages/ui/components/dropdown-menu";
+import { Button } from "@packages/ui/components/button";
+import { User, Settings, LogOut } from "lucide-react";
 
 const meta = {
-  title: 'Components/DropdownMenu',
+  title: "Components/DropdownMenu",
   component: DropdownMenu,
 } satisfies Meta<typeof DropdownMenu>;
 
@@ -21,9 +21,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" />}>
-        Open Menu
-      </DropdownMenuTrigger>
+      <DropdownMenuTrigger render={<Button variant="outline" />}>Open Menu</DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem>
           <User />
@@ -42,7 +40,7 @@ export const Default: Story = {
     </DropdownMenu>
   ),
   play: async ({ canvas, userEvent }) => {
-    const trigger = canvas.getByRole('button', { name: 'Open Menu' });
+    const trigger = canvas.getByRole("button", { name: "Open Menu" });
     await userEvent.click(trigger);
     await expect(document.querySelector('[data-slot="dropdown-menu-content"]')).toBeInTheDocument();
   },

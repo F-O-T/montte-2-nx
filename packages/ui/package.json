@@ -54,9 +54,9 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@tooling/config": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@tooling/config": "workspace:*",
     "tailwindcss": "catalog:",
     "typescript": "^5.9.3"
   }

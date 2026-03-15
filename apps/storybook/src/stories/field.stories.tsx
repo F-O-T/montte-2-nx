@@ -1,14 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import {
-  Field,
-  FieldLabel,
-  FieldDescription,
-  FieldError,
-} from '@packages/ui/components/field';
-import { Input } from '@packages/ui/components/input';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Field, FieldLabel, FieldDescription, FieldError } from "@packages/ui/components/field";
+import { Input } from "@packages/ui/components/input";
 
 const meta = {
-  title: 'Components/Field',
+  title: "Components/Field",
   component: Field,
 } satisfies Meta<typeof Field>;
 

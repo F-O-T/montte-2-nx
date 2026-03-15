@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Input } from '@packages/ui/components/input';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Input } from "@packages/ui/components/input";
 
 const meta = {
-  title: 'Components/Input',
+  title: "Components/Input",
   component: Input,
   args: {
-    placeholder: 'Enter text...',
+    placeholder: "Enter text...",
   },
 } satisfies Meta<typeof Input>;
 
@@ -15,17 +15,17 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const WithValue: Story = {
-  args: { defaultValue: 'Hello world' },
+  args: { defaultValue: "Hello world" },
 };
 
 export const Disabled: Story = {
-  args: { disabled: true, defaultValue: 'Disabled input' },
+  args: { disabled: true, defaultValue: "Disabled input" },
 };
 
 export const Password: Story = {
-  args: { type: 'password', placeholder: 'Password' },
+  args: { type: "password", placeholder: "Password" },
 };
 
 export const File: Story = {
-  args: { type: 'file' },
+  args: { type: "file" },
 };

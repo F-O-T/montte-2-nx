@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Skeleton } from '@packages/ui/components/skeleton';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Skeleton } from "@packages/ui/components/skeleton";
 
 const meta = {
-  title: 'Components/Skeleton',
+  title: "Components/Skeleton",
   component: Skeleton,
 } satisfies Meta<typeof Skeleton>;
 

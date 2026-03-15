@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   ButtonGroup,
   ButtonGroupText,
   ButtonGroupSeparator,
-} from '@packages/ui/components/button-group';
-import { Button } from '@packages/ui/components/button';
+} from "@packages/ui/components/button-group";
+import { Button } from "@packages/ui/components/button";
 
 const meta = {
-  title: 'Components/ButtonGroup',
+  title: "Components/ButtonGroup",
   component: ButtonGroup,
 } satisfies Meta<typeof ButtonGroup>;
 

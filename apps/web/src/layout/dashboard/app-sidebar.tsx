@@ -1,9 +1,5 @@
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@packages/ui/components/avatar';
-import { Button } from '@packages/ui/components/button';
+import { Avatar, AvatarFallback, AvatarImage } from "@packages/ui/components/avatar";
+import { Button } from "@packages/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,8 +10,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@packages/ui/components/dropdown-menu';
-import { Separator } from '@packages/ui/components/separator';
+} from "@packages/ui/components/dropdown-menu";
+import { Separator } from "@packages/ui/components/separator";
 import {
   Sidebar,
   SidebarContent,
@@ -27,25 +23,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from '@packages/ui/components/sidebar';
-import { Skeleton } from '@packages/ui/components/skeleton';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@packages/ui/components/tooltip';
-import { Link, useLocation, useNavigate } from '@tanstack/react-router';
-import {
-  Check,
-  ChevronsUpDown,
-  Home,
-  LogOut,
-  Plus,
-  Settings,
-  type LucideIcon,
-} from 'lucide-react';
-import { useCallback, useTransition } from 'react';
-import { authClient } from '@/lib/auth-client';
+} from "@packages/ui/components/sidebar";
+import { Skeleton } from "@packages/ui/components/skeleton";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@packages/ui/components/tooltip";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
+import { Check, ChevronsUpDown, Home, LogOut, Plus, Settings, type LucideIcon } from "lucide-react";
+import { useCallback, useTransition } from "react";
+import { authClient } from "@/lib/auth-client";
 
 type NavItem = {
   id: string;
@@ -54,22 +38,15 @@ type NavItem = {
   route: string;
 };
 
-const mainItems: NavItem[] = [
-  { id: 'home', label: 'Home', icon: Home, route: '/dashboard' },
-];
+const mainItems: NavItem[] = [{ id: "home", label: "Home", icon: Home, route: "/dashboard" }];
 
 function NavItemButton({ item }: { item: NavItem }) {
   const { pathname } = useLocation();
-  const isActive =
-    pathname === item.route || pathname.startsWith(`${item.route}/`);
+  const isActive = pathname === item.route || pathname.startsWith(`${item.route}/`);
 
   return (
     <SidebarMenuItem>
-      <SidebarMenuButton
-        isActive={isActive}
-        tooltip={item.label}
-        render={<Link to={item.route} />}
-      >
+      <SidebarMenuButton isActive={isActive} tooltip={item.label} render={<Link to={item.route} />}>
         <item.icon />
         <span>{item.label}</span>
       </SidebarMenuButton>
@@ -77,42 +54,41 @@ function NavItemButton({ item }: { item: NavItem }) {
   );
 }
 
-
 const ORG_AVATAR_COLORS = [
-  'bg-blue-600',
-  'bg-emerald-600',
-  'bg-violet-600',
-  'bg-amber-600',
-  'bg-rose-600',
-  'bg-cyan-600',
-  'bg-pink-600',
-  'bg-indigo-600',
+  "bg-blue-600",
+  "bg-emerald-600",
+  "bg-violet-600",
+  "bg-amber-600",
+  "bg-rose-600",
+  "bg-cyan-600",
+  "bg-pink-600",
+  "bg-indigo-600",
 ];
 
 function getInitials(value: string) {
-  if (!value) return '?';
+  if (!value) return "?";
   return value.trim().charAt(0).toUpperCase();
 }
 
 function getOrgColor(name: string): string {
-  if (!name) return ORG_AVATAR_COLORS[0] ?? '';
+  if (!name) return ORG_AVATAR_COLORS[0] ?? "";
   let hash = 0;
   for (const char of name) {
     hash = char.charCodeAt(0) + ((hash << 5) - hash);
   }
-  return ORG_AVATAR_COLORS[Math.abs(hash) % ORG_AVATAR_COLORS.length] ?? '';
+  return ORG_AVATAR_COLORS[Math.abs(hash) % ORG_AVATAR_COLORS.length] ?? "";
 }
 
 function OrgAvatar({
   name,
   logo,
-  size = 'sm',
+  size = "sm",
 }: {
   name: string;
   logo?: string | null;
-  size?: 'sm' | 'md';
+  size?: "sm" | "md";
 }) {
-  const sizeClass = size === 'md' ? 'size-5 rounded-md' : 'size-4 rounded-sm';
+  const sizeClass = size === "md" ? "size-5 rounded-md" : "size-4 rounded-sm";
   return (
     <Avatar className={`${sizeClass} shrink-0`}>
       <AvatarImage alt={name} src={logo ?? undefined} />
@@ -149,7 +125,9 @@ function SidebarScopeSwitcher() {
   const navigate = useNavigate();
   const [isPending, startTransition] = useTransition();
 
-  const activeTeamId = (session?.session as Record<string, unknown>)?.activeTeamId as string | undefined;
+  const activeTeamId = (session?.session as Record<string, unknown>)?.activeTeamId as
+    | string
+    | undefined;
 
   type TeamItem = { id: string; name: string; organizationId: string; createdAt: Date };
   const activeOrgData = activeOrg as (typeof activeOrg & { teams?: TeamItem[] }) | null;
@@ -175,15 +153,18 @@ function SidebarScopeSwitcher() {
   );
 
   const handleCreateOrganization = useCallback(async () => {
-    const name = window.prompt('Organization name');
+    const name = window.prompt("Organization name");
     if (!name) return;
-    const slug = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    const slug = name
+      .toLowerCase()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "");
     await authClient.organization.create({ name, slug });
   }, []);
 
   const handleCreateTeam = useCallback(async () => {
     if (!activeOrg?.id) return;
-    const name = window.prompt('Team name');
+    const name = window.prompt("Team name");
     if (!name) return;
     await authClient.organization.createTeam({
       name,
@@ -208,22 +189,19 @@ function SidebarScopeSwitcher() {
             }
           >
             <Avatar className="aspect-square size-8 shrink-0 rounded-lg">
-              <AvatarImage
-                alt={activeOrg?.name ?? ''}
-                src={activeOrg?.logo ?? undefined}
-              />
+              <AvatarImage alt={activeOrg?.name ?? ""} src={activeOrg?.logo ?? undefined} />
               <AvatarFallback
-                className={`rounded-lg text-xs font-bold text-white ${getOrgColor(activeOrg?.name ?? '')}`}
+                className={`rounded-lg text-xs font-bold text-white ${getOrgColor(activeOrg?.name ?? "")}`}
               >
-                {getInitials(activeOrg?.name ?? session.user.name ?? '')}
+                {getInitials(activeOrg?.name ?? session.user.name ?? "")}
               </AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-medium">
-                {activeTeam?.name ?? activeOrg?.name ?? session.user.name ?? 'User'}
+                {activeTeam?.name ?? activeOrg?.name ?? session.user.name ?? "User"}
               </span>
               <span className="truncate text-xs text-muted-foreground">
-                {activeOrg ? activeOrg.name : session.user.email ?? ''}
+                {activeOrg ? activeOrg.name : (session.user.email ?? "")}
               </span>
             </div>
             <ChevronsUpDown className="ml-auto size-4 shrink-0" />
@@ -232,7 +210,7 @@ function SidebarScopeSwitcher() {
           <DropdownMenuContent
             align="start"
             className="w-(--radix-dropdown-menu-trigger-width) min-w-72 rounded-lg"
-            side={isMobile ? 'bottom' : 'bottom'}
+            side={isMobile ? "bottom" : "bottom"}
             sideOffset={4}
           >
             {activeOrg && teams.length > 0 && (
@@ -243,16 +221,11 @@ function SidebarScopeSwitcher() {
 
                 <DropdownMenuSub>
                   <DropdownMenuSubTrigger className="gap-2">
-                    <span className="truncate font-medium">
-                      {activeTeam?.name ?? 'No team'}
-                    </span>
+                    <span className="truncate font-medium">{activeTeam?.name ?? "No team"}</span>
                   </DropdownMenuSubTrigger>
                   <DropdownMenuSubContent className="min-w-52">
                     {teams.map((team: { id: string; name: string }) => (
-                      <DropdownMenuItem
-                        key={team.id}
-                        onSelect={() => handleTeamSwitch(team.id)}
-                      >
+                      <DropdownMenuItem key={team.id} onSelect={() => handleTeamSwitch(team.id)}>
                         {team.id === activeTeamId ? (
                           <Check className="size-4 shrink-0" />
                         ) : (
@@ -279,20 +252,12 @@ function SidebarScopeSwitcher() {
 
             <DropdownMenuSub>
               <DropdownMenuSubTrigger className="gap-2">
-                <OrgAvatar
-                  logo={activeOrg?.logo}
-                  name={activeOrg?.name ?? ''}
-                />
-                <span className="truncate font-medium">
-                  {activeOrg?.name ?? 'No organization'}
-                </span>
+                <OrgAvatar logo={activeOrg?.logo} name={activeOrg?.name ?? ""} />
+                <span className="truncate font-medium">{activeOrg?.name ?? "No organization"}</span>
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="min-w-52">
                 {orgList.map((org) => (
-                  <DropdownMenuItem
-                    key={org.id}
-                    onSelect={() => handleOrganizationSwitch(org.id)}
-                  >
+                  <DropdownMenuItem key={org.id} onSelect={() => handleOrganizationSwitch(org.id)}>
                     {org.id === activeOrg?.id ? (
                       <Check className="size-4 shrink-0" />
                     ) : (
@@ -318,21 +283,14 @@ function SidebarScopeSwitcher() {
 
             <DropdownMenuItem>
               <Avatar className="size-6 shrink-0 rounded-full">
-                <AvatarImage
-                  alt={session.user.name ?? ''}
-                  src={session.user.image ?? undefined}
-                />
+                <AvatarImage alt={session.user.name ?? ""} src={session.user.image ?? undefined} />
                 <AvatarFallback className="rounded-full text-[10px]">
-                  {session.user.name?.charAt(0) ?? '?'}
+                  {session.user.name?.charAt(0) ?? "?"}
                 </AvatarFallback>
               </Avatar>
               <div className="grid min-w-0 flex-1 leading-tight">
-                <span className="truncate text-sm font-medium">
-                  {session.user.name}
-                </span>
-                <span className="truncate text-xs text-muted-foreground">
-                  {session.user.email}
-                </span>
+                <span className="truncate text-sm font-medium">{session.user.name}</span>
+                <span className="truncate text-xs text-muted-foreground">{session.user.email}</span>
               </div>
             </DropdownMenuItem>
 
@@ -341,7 +299,7 @@ function SidebarScopeSwitcher() {
                 authClient.signOut({
                   fetchOptions: {
                     onSuccess: () => {
-                      navigate({ to: '/' });
+                      navigate({ to: "/" });
                     },
                   },
                 });

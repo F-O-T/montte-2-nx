@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Select,
   SelectTrigger,
@@ -7,10 +7,10 @@ import {
   SelectValue,
   SelectGroup,
   SelectLabel,
-} from '@packages/ui/components/select';
+} from "@packages/ui/components/select";
 
 const meta = {
-  title: 'Components/Select',
+  title: "Components/Select",
   component: Select,
 } satisfies Meta<typeof Select>;
 

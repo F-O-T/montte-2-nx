@@ -1,15 +1,15 @@
-import { NodeSDK } from '@opentelemetry/sdk-node';
-import { OTLPLogExporter } from '@opentelemetry/exporter-logs-otlp-http';
+import { NodeSDK } from "@opentelemetry/sdk-node";
+import { OTLPLogExporter } from "@opentelemetry/exporter-logs-otlp-http";
 import {
   BatchLogRecordProcessor,
   ConsoleLogRecordExporter,
   type LogRecordProcessor,
   SimpleLogRecordProcessor,
-} from '@opentelemetry/sdk-logs';
-import { Resource } from '@opentelemetry/resources';
-import { ATTR_SERVICE_NAME } from '@opentelemetry/semantic-conventions';
-import { ORPCInstrumentation } from '@orpc/otel';
-import { env } from '@core/env';
+} from "@opentelemetry/sdk-logs";
+import { Resource } from "@opentelemetry/resources";
+import { ATTR_SERVICE_NAME } from "@opentelemetry/semantic-conventions";
+import { ORPCInstrumentation } from "@orpc/otel";
+import { env } from "@core/env";
 
 const resource = new Resource({
   [ATTR_SERVICE_NAME]: env.OTEL_SERVICE_NAME,

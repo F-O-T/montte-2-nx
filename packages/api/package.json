@@ -19,14 +19,14 @@
     "format": "oxfmt --write src"
   },
   "dependencies": {
+    "@core/arcjet": "workspace:*",
+    "@core/auth": "workspace:*",
+    "@core/db": "workspace:*",
+    "@core/env": "workspace:*",
     "@orpc/client": "catalog:",
     "@orpc/openapi": "catalog:",
     "@orpc/server": "catalog:",
     "@orpc/zod": "catalog:",
-    "@core/auth": "workspace:*",
-    "@core/db": "workspace:*",
-    "@core/arcjet": "workspace:*",
-    "@core/env": "workspace:*",
     "dotenv": "catalog:",
     "zod": "catalog:"
   },

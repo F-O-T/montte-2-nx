@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect } from 'storybook/test';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "storybook/test";
 import {
   Dialog,
   DialogTrigger,
@@ -8,13 +8,13 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from '@packages/ui/components/dialog';
-import { Button } from '@packages/ui/components/button';
-import { Input } from '@packages/ui/components/input';
-import { Field, FieldLabel } from '@packages/ui/components/field';
+} from "@packages/ui/components/dialog";
+import { Button } from "@packages/ui/components/button";
+import { Input } from "@packages/ui/components/input";
+import { Field, FieldLabel } from "@packages/ui/components/field";
 
 const meta = {
-  title: 'Components/Dialog',
+  title: "Components/Dialog",
   component: Dialog,
 } satisfies Meta<typeof Dialog>;
 
@@ -45,8 +45,10 @@ export const Default: Story = {
     </Dialog>
   ),
   play: async ({ canvas, userEvent }) => {
-    const trigger = canvas.getByRole('button', { name: 'Edit Profile' });
+    const trigger = canvas.getByRole("button", { name: "Edit Profile" });
     await userEvent.click(trigger);
-    await expect(document.querySelector('[data-slot="dialog-title"]')).toHaveTextContent('Edit Profile');
+    await expect(document.querySelector('[data-slot="dialog-title"]')).toHaveTextContent(
+      "Edit Profile",
+    );
   },
 };

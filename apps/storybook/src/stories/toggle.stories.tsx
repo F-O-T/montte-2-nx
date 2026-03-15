@@ -1,19 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect } from 'storybook/test';
-import { Toggle } from '@packages/ui/components/toggle';
-import { Bold } from 'lucide-react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "storybook/test";
+import { Toggle } from "@packages/ui/components/toggle";
+import { Bold } from "lucide-react";
 
 const meta = {
-  title: 'Components/Toggle',
+  title: "Components/Toggle",
   component: Toggle,
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'outline'],
+      control: "select",
+      options: ["default", "outline"],
     },
     size: {
-      control: 'select',
-      options: ['default', 'sm', 'lg'],
+      control: "select",
+      options: ["default", "sm", "lg"],
     },
   },
 } satisfies Meta<typeof Toggle>;
@@ -24,22 +24,22 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: <Bold className="size-4" />,
-    'aria-label': 'Toggle bold',
+    "aria-label": "Toggle bold",
   },
   play: async ({ canvas, userEvent }) => {
-    const toggle = canvas.getByRole('button', { name: 'Toggle bold' });
+    const toggle = canvas.getByRole("button", { name: "Toggle bold" });
     await userEvent.click(toggle);
-    await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+    await expect(toggle).toHaveAttribute("aria-pressed", "true");
     await userEvent.click(toggle);
-    await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+    await expect(toggle).toHaveAttribute("aria-pressed", "false");
   },
 };
 
 export const Outline: Story = {
   args: {
-    variant: 'outline',
+    variant: "outline",
     children: <Bold className="size-4" />,
-    'aria-label': 'Toggle bold',
+    "aria-label": "Toggle bold",
   },
 };
 

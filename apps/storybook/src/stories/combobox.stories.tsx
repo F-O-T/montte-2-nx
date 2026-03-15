@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Combobox,
   ComboboxInput,
@@ -7,18 +7,18 @@ import {
   ComboboxEmpty,
   ComboboxGroup,
   ComboboxItem,
-} from '@packages/ui/components/combobox';
+} from "@packages/ui/components/combobox";
 
 const frameworks = [
-  { value: 'react', label: 'React' },
-  { value: 'vue', label: 'Vue' },
-  { value: 'angular', label: 'Angular' },
-  { value: 'svelte', label: 'Svelte' },
-  { value: 'solid', label: 'Solid' },
+  { value: "react", label: "React" },
+  { value: "vue", label: "Vue" },
+  { value: "angular", label: "Angular" },
+  { value: "svelte", label: "Svelte" },
+  { value: "solid", label: "Solid" },
 ];
 
 const meta = {
-  title: 'Components/Combobox',
+  title: "Components/Combobox",
   component: Combobox,
 } satisfies Meta<typeof Combobox>;
 

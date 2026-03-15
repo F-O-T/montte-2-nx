@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect } from 'storybook/test';
-import { ToggleGroup, ToggleGroupItem } from '@packages/ui/components/toggle-group';
-import { Bold, Italic, Underline } from 'lucide-react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "storybook/test";
+import { ToggleGroup, ToggleGroupItem } from "@packages/ui/components/toggle-group";
+import { Bold, Italic, Underline } from "lucide-react";
 
 const meta = {
-  title: 'Components/ToggleGroup',
+  title: "Components/ToggleGroup",
   component: ToggleGroup,
 } satisfies Meta<typeof ToggleGroup>;
 
@@ -26,9 +26,9 @@ export const Default: Story = {
     </ToggleGroup>
   ),
   play: async ({ canvas, userEvent }) => {
-    const bold = canvas.getByRole('button', { name: 'Toggle bold' });
+    const bold = canvas.getByRole("button", { name: "Toggle bold" });
     await userEvent.click(bold);
-    await expect(bold).toHaveAttribute('aria-pressed', 'true');
+    await expect(bold).toHaveAttribute("aria-pressed", "true");
   },
 };
 

@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect } from 'storybook/test';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "storybook/test";
 import {
   Collapsible,
   CollapsibleTrigger,
   CollapsibleContent,
-} from '@packages/ui/components/collapsible';
-import { Button } from '@packages/ui/components/button';
-import { ChevronsUpDown } from 'lucide-react';
+} from "@packages/ui/components/collapsible";
+import { Button } from "@packages/ui/components/button";
+import { ChevronsUpDown } from "lucide-react";
 
 const meta = {
-  title: 'Components/Collapsible',
+  title: "Components/Collapsible",
   component: Collapsible,
 } satisfies Meta<typeof Collapsible>;
 
@@ -34,8 +34,8 @@ export const Default: Story = {
     </Collapsible>
   ),
   play: async ({ canvas, userEvent }) => {
-    const trigger = canvas.getByRole('button', { name: 'Toggle' });
+    const trigger = canvas.getByRole("button", { name: "Toggle" });
     await userEvent.click(trigger);
-    await expect(canvas.getByText('@project/api')).toBeVisible();
+    await expect(canvas.getByText("@project/api")).toBeVisible();
   },
 };

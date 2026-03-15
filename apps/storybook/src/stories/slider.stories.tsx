@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Slider } from '@packages/ui/components/slider';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Slider } from "@packages/ui/components/slider";
 
 const meta = {
-  title: 'Components/Slider',
+  title: "Components/Slider",
   component: Slider,
 } satisfies Meta<typeof Slider>;
 

@@ -34,9 +34,9 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@tooling/config": "workspace:*",
     "@tooling/test": "workspace:*",
     "@types/pg": "^8.16.0",
-    "@tooling/config": "workspace:*",
     "drizzle-kit": "^0.31.8",
     "typescript": "^5"
   }

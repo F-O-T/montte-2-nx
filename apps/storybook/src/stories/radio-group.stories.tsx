@@ -1,13 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect } from 'storybook/test';
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from '@packages/ui/components/radio-group';
-import { Label } from '@packages/ui/components/label';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "storybook/test";
+import { RadioGroup, RadioGroupItem } from "@packages/ui/components/radio-group";
+import { Label } from "@packages/ui/components/label";
 
 const meta = {
-  title: 'Components/RadioGroup',
+  title: "Components/RadioGroup",
   component: RadioGroup,
 } satisfies Meta<typeof RadioGroup>;
 
@@ -32,12 +29,12 @@ export const Default: Story = {
     </RadioGroup>
   ),
   play: async ({ canvas, userEvent }) => {
-    const radios = canvas.getAllByRole('radio');
+    const radios = canvas.getAllByRole("radio");
     const firstRadio = radios[0];
     const secondRadio = radios[1];
 
     if (!firstRadio || !secondRadio) {
-      throw new Error('Expected radio options to be rendered');
+      throw new Error("Expected radio options to be rendered");
     }
 
     await expect(firstRadio).toBeChecked();

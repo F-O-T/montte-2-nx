@@ -1,12 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent,
-} from '@packages/ui/components/hover-card';
+import type { Meta, StoryObj } from "@storybook/react";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@packages/ui/components/hover-card";
 
 const meta = {
-  title: 'Components/HoverCard',
+  title: "Components/HoverCard",
   component: HoverCard,
 } satisfies Meta<typeof HoverCard>;
 
@@ -16,9 +12,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <HoverCard>
-      <HoverCardTrigger className="cursor-pointer underline">
-        @nextjs
-      </HoverCardTrigger>
+      <HoverCardTrigger className="cursor-pointer underline">@nextjs</HoverCardTrigger>
       <HoverCardContent>
         <div className="flex flex-col gap-2">
           <h4 className="text-sm font-semibold">Next.js</h4>

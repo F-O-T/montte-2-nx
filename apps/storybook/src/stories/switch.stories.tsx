@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect } from 'storybook/test';
-import { Switch } from '@packages/ui/components/switch';
-import { Label } from '@packages/ui/components/label';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "storybook/test";
+import { Switch } from "@packages/ui/components/switch";
+import { Label } from "@packages/ui/components/label";
 
 const meta = {
-  title: 'Components/Switch',
+  title: "Components/Switch",
   component: Switch,
 } satisfies Meta<typeof Switch>;
 
@@ -21,7 +21,7 @@ export const WithLabel: Story = {
     </div>
   ),
   play: async ({ canvas, userEvent }) => {
-    const toggle = canvas.getByRole('switch');
+    const toggle = canvas.getByRole("switch");
     await expect(toggle).not.toBeChecked();
     await userEvent.click(toggle);
     await expect(toggle).toBeChecked();

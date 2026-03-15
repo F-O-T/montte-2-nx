@@ -40,7 +40,7 @@
     "lint": "nx run-many -t lint",
     "lint:fix": "nx run-many -t lint -- --fix",
     "format": "nx run-many -t format",
-    "format:check": "oxfmt --check apps core packages tooling",
+    "format:check": "bun run tooling/oxc/check-format.ts",
     "check": "bun run lint && bun run format",
     "check-boundaries": "bun run tooling/boundary/check-boundaries.ts",
     "db:push": "nx run-many -t db:push --projects=@core/db",

@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   ResizablePanelGroup,
   ResizablePanel,
   ResizableHandle,
-} from '@packages/ui/components/resizable';
+} from "@packages/ui/components/resizable";
 
 const meta = {
-  title: 'Components/Resizable',
+  title: "Components/Resizable",
   component: ResizablePanelGroup,
 } satisfies Meta<typeof ResizablePanelGroup>;
 
@@ -41,15 +41,11 @@ export const ThreePanels: Story = {
       className="min-h-[200px] max-w-md rounded-lg border"
     >
       <ResizablePanel defaultSize={30}>
-        <div className="flex h-full items-center justify-center p-6">
-          Sidebar
-        </div>
+        <div className="flex h-full items-center justify-center p-6">Sidebar</div>
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel defaultSize={40}>
-        <div className="flex h-full items-center justify-center p-6">
-          Content
-        </div>
+        <div className="flex h-full items-center justify-center p-6">Content</div>
       </ResizablePanel>
       <ResizableHandle />
       <ResizablePanel defaultSize={30}>

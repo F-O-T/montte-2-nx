@@ -1,17 +1,11 @@
 import { useStore } from "@tanstack/react-store";
 import type React from "react";
 import { useEffect } from "react";
-import {
-  type ContextPanelTab,
-  contextPanelStore,
-  type PanelAction,
-} from "./context-panel-store";
+import { type ContextPanelTab, contextPanelStore, type PanelAction } from "./context-panel-store";
 
-export const openContextPanel = () =>
-  contextPanelStore.setState((s) => ({ ...s, isOpen: true }));
+export const openContextPanel = () => contextPanelStore.setState((s) => ({ ...s, isOpen: true }));
 
-export const closeContextPanel = () =>
-  contextPanelStore.setState((s) => ({ ...s, isOpen: false }));
+export const closeContextPanel = () => contextPanelStore.setState((s) => ({ ...s, isOpen: false }));
 
 export const toggleContextPanel = () =>
   contextPanelStore.setState((s) => ({ ...s, isOpen: !s.isOpen }));
@@ -64,13 +58,10 @@ export const usePageActions = (actions: PanelAction[] | null) => {
 };
 
 export const useContextPanel = () => {
-  const {
-    isOpen,
-    activeTabId,
-    dynamicTabs,
-    infoContent,
-    pageActions,
-  } = useStore(contextPanelStore, (s) => s);
+  const { isOpen, activeTabId, dynamicTabs, infoContent, pageActions } = useStore(
+    contextPanelStore,
+    (s) => s,
+  );
   return {
     isOpen,
     activeTabId,

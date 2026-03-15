@@ -15,15 +15,8 @@ import { cn } from "@packages/ui/lib/utils";
 import { useStore } from "@tanstack/react-store";
 import { Info, X } from "lucide-react";
 import type React from "react";
-import {
-  type ContextPanelTab,
-  contextPanelStore,
-} from "./context-panel-store";
-import {
-  closeContextPanel,
-  openContextPanel,
-  setActiveTab,
-} from "./use-context-panel";
+import { type ContextPanelTab, contextPanelStore } from "./context-panel-store";
+import { closeContextPanel, openContextPanel, setActiveTab } from "./use-context-panel";
 
 function InfoContent() {
   const { infoContent, pageActions } = useStore(contextPanelStore, (s) => s);
@@ -90,9 +83,7 @@ function ContextPanelInner() {
         <div className="flex-row flex items-center gap-2">
           {allTabs.map((tab) => (
             <Button
-              className={cn(
-                activeTabId === tab.id && "bg-accent text-accent-foreground",
-              )}
+              className={cn(activeTabId === tab.id && "bg-accent text-accent-foreground")}
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               type="button"

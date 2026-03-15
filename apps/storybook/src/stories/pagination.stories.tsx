@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Pagination,
   PaginationContent,
@@ -7,10 +7,10 @@ import {
   PaginationNext,
   PaginationLink,
   PaginationEllipsis,
-} from '@packages/ui/components/pagination';
+} from "@packages/ui/components/pagination";
 
 const meta = {
-  title: 'Components/Pagination',
+  title: "Components/Pagination",
   component: Pagination,
 } satisfies Meta<typeof Pagination>;
 
@@ -25,7 +25,9 @@ export const Default: Story = {
           <PaginationPrevious href="#" />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#" isActive>1</PaginationLink>
+          <PaginationLink href="#" isActive>
+            1
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href="#">2</PaginationLink>

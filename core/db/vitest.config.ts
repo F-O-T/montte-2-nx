@@ -1,4 +1,4 @@
-import { defineNodeUnitTestConfig } from '@tooling/config/vitest/node';
+import { defineNodeUnitTestConfig } from "../../tooling/config/vitest/node";
 
 export default defineNodeUnitTestConfig({
   overrides: {

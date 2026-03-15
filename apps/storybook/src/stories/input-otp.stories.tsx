@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
   InputOTPSeparator,
-} from '@packages/ui/components/input-otp';
+} from "@packages/ui/components/input-otp";
 
 const meta = {
-  title: 'Components/InputOTP',
+  title: "Components/InputOTP",
   component: InputOTP,
 } satisfies Meta<typeof InputOTP>;
 

@@ -4,10 +4,6 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./tsconfig.base.json": "./tsconfig.base.json",
-    "./vitest/base": "./vitest/base.ts",
-    "./vitest/coverage": "./vitest/coverage.ts",
-    "./vitest/filters": "./vitest/filters.ts",
-    "./vitest/node": "./vitest/node.ts"
+    "./tsconfig.base.json": "./tsconfig.base.json"
   }
 }

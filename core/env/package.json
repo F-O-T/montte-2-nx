@@ -21,8 +21,8 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "catalog:",
     "@tooling/config": "workspace:*",
+    "@types/node": "catalog:",
     "typescript": "^5"
   }
 }

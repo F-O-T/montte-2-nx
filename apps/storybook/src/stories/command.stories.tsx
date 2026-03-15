@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Command,
   CommandInput,
@@ -7,11 +7,11 @@ import {
   CommandGroup,
   CommandItem,
   CommandSeparator,
-} from '@packages/ui/components/command';
-import { Calendar, Settings, User, CreditCard } from 'lucide-react';
+} from "@packages/ui/components/command";
+import { Calendar, Settings, User, CreditCard } from "lucide-react";
 
 const meta = {
-  title: 'Components/Command',
+  title: "Components/Command",
   component: Command,
 } satisfies Meta<typeof Command>;
 

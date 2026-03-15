@@ -16,8 +16,8 @@
     "format": "oxfmt --write src"
   },
   "dependencies": {
-    "@core/env": "workspace:*",
-    "@arcjet/node": "^1.3.0"
+    "@arcjet/node": "^1.3.0",
+    "@core/env": "workspace:*"
   },
   "devDependencies": {
     "@tooling/config": "workspace:*",

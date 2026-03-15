@@ -1,7 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it } from "vitest";
 
-describe('packages/api test wiring', () => {
-  it('runs unit tests', () => {
+describe("packages/api test wiring", () => {
+  it("runs unit tests", () => {
     expect(true).toBe(true);
   });
 });

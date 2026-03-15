@@ -1,25 +1,25 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Button } from '@packages/ui/components/button';
-import { Mail, Plus, Trash2 } from 'lucide-react';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Button } from "@packages/ui/components/button";
+import { Mail, Plus, Trash2 } from "lucide-react";
 
 const meta = {
-  title: 'Components/Button',
+  title: "Components/Button",
   component: Button,
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link'],
+      control: "select",
+      options: ["default", "outline", "secondary", "ghost", "destructive", "link"],
     },
     size: {
-      control: 'select',
-      options: ['default', 'xs', 'sm', 'lg', 'icon', 'icon-xs', 'icon-sm', 'icon-lg'],
+      control: "select",
+      options: ["default", "xs", "sm", "lg", "icon", "icon-xs", "icon-sm", "icon-lg"],
     },
-    disabled: { control: 'boolean' },
+    disabled: { control: "boolean" },
   },
   args: {
-    children: 'Button',
-    variant: 'default',
-    size: 'default',
+    children: "Button",
+    variant: "default",
+    size: "default",
   },
 } satisfies Meta<typeof Button>;
 
@@ -29,31 +29,31 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const Outline: Story = {
-  args: { variant: 'outline' },
+  args: { variant: "outline" },
 };
 
 export const Secondary: Story = {
-  args: { variant: 'secondary' },
+  args: { variant: "secondary" },
 };
 
 export const Ghost: Story = {
-  args: { variant: 'ghost' },
+  args: { variant: "ghost" },
 };
 
 export const Destructive: Story = {
-  args: { variant: 'destructive', children: 'Delete' },
+  args: { variant: "destructive", children: "Delete" },
 };
 
 export const Link: Story = {
-  args: { variant: 'link', children: 'Link Button' },
+  args: { variant: "link", children: "Link Button" },
 };
 
 export const Small: Story = {
-  args: { size: 'sm', children: 'Small' },
+  args: { size: "sm", children: "Small" },
 };
 
 export const Large: Story = {
-  args: { size: 'lg', children: 'Large' },
+  args: { size: "lg", children: "Large" },
 };
 
 export const WithIcon: Story = {
@@ -65,7 +65,7 @@ export const WithIcon: Story = {
 };
 
 export const IconOnly: Story = {
-  args: { size: 'icon' },
+  args: { size: "icon" },
   render: (args) => (
     <Button {...args}>
       <Plus />
@@ -84,7 +84,9 @@ export const AllVariants: Story = {
       <Button variant="outline">Outline</Button>
       <Button variant="secondary">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
-      <Button variant="destructive"><Trash2 /> Destructive</Button>
+      <Button variant="destructive">
+        <Trash2 /> Destructive
+      </Button>
       <Button variant="link">Link</Button>
     </div>
   ),

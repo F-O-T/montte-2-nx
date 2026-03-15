@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Menubar,
   MenubarMenu,
@@ -7,10 +7,10 @@ import {
   MenubarItem,
   MenubarSeparator,
   MenubarShortcut,
-} from '@packages/ui/components/menubar';
+} from "@packages/ui/components/menubar";
 
 const meta = {
-  title: 'Components/Menubar',
+  title: "Components/Menubar",
   component: Menubar,
 } satisfies Meta<typeof Menubar>;
 

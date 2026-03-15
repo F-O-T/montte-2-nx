@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   NavigationMenu,
   NavigationMenuList,
   NavigationMenuItem,
   NavigationMenuLink,
-} from '@packages/ui/components/navigation-menu';
+} from "@packages/ui/components/navigation-menu";
 
 const meta = {
-  title: 'Components/NavigationMenu',
+  title: "Components/NavigationMenu",
   component: NavigationMenu,
 } satisfies Meta<typeof NavigationMenu>;
 

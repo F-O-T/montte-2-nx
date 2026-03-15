@@ -16,9 +16,7 @@ export default defineConfig({
       urlPatterns: [
         {
           pattern: "/:path(.*)?",
-          localized: [
-            ["pt-br", "/pt-br/:path(.*)?"],
-          ],
+          localized: [["pt-br", "/pt-br/:path(.*)?"]],
         },
       ],
     }),

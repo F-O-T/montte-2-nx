@@ -1,10 +1,10 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from "vitest";
 
 const { getSessionMock } = vi.hoisted(() => ({
   getSessionMock: vi.fn(),
 }));
 
-vi.mock('@core/auth', () => ({
+vi.mock("@core/auth", () => ({
   auth: {
     api: {
       getSession: getSessionMock,
@@ -12,18 +12,18 @@ vi.mock('@core/auth', () => ({
   },
 }));
 
-import { createContext } from '../src/context';
+import { createContext } from "../src/context";
 
-describe('createContext', () => {
-  it('loads the session from auth using the request headers', async () => {
-    const req = new Request('https://example.com/api/rpc', {
+describe("createContext", () => {
+  it("loads the session from auth using the request headers", async () => {
+    const req = new Request("https://example.com/api/rpc", {
       headers: {
-        cookie: 'session=abc',
+        cookie: "session=abc",
       },
     });
     const session = {
       user: {
-        id: 'user_1',
+        id: "user_1",
       },
     };
 

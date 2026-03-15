@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Card,
   CardHeader,
@@ -6,11 +6,11 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from '@packages/ui/components/card';
-import { Button } from '@packages/ui/components/button';
+} from "@packages/ui/components/card";
+import { Button } from "@packages/ui/components/button";
 
 const meta = {
-  title: 'Components/Card',
+  title: "Components/Card",
   component: Card,
 } satisfies Meta<typeof Card>;
 
@@ -28,7 +28,9 @@ export const Default: Story = {
         <p>Card content with some example text.</p>
       </CardContent>
       <CardFooter>
-        <Button variant="outline" className="mr-2">Cancel</Button>
+        <Button variant="outline" className="mr-2">
+          Cancel
+        </Button>
         <Button>Submit</Button>
       </CardFooter>
     </Card>

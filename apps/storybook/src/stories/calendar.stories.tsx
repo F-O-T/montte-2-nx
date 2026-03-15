@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import * as React from 'react';
-import { Calendar } from '@packages/ui/components/calendar';
-import type { DateRange } from 'react-day-picker';
+import type { Meta, StoryObj } from "@storybook/react";
+import * as React from "react";
+import { Calendar } from "@packages/ui/components/calendar";
+import type { DateRange } from "react-day-picker";
 
 const meta = {
-  title: 'Components/Calendar',
+  title: "Components/Calendar",
   component: Calendar,
 } satisfies Meta<typeof Calendar>;
 
@@ -18,13 +18,7 @@ export const Default: Story = {
 export const WithSelectedDate: Story = {
   render: function Render() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
-    return (
-      <Calendar
-        mode="single"
-        selected={date}
-        onSelect={setDate}
-      />
-    );
+    return <Calendar mode="single" selected={date} onSelect={setDate} />;
   },
 };
 
@@ -34,12 +28,6 @@ export const RangeSelection: Story = {
       from: new Date(),
       to: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     });
-    return (
-      <Calendar
-        mode="range"
-        selected={range}
-        onSelect={setRange}
-      />
-    );
+    return <Calendar mode="range" selected={range} onSelect={setRange} />;
   },
 };

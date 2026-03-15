@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { NativeSelect, NativeSelectOption } from '@packages/ui/components/native-select';
+import type { Meta, StoryObj } from "@storybook/react";
+import { NativeSelect, NativeSelectOption } from "@packages/ui/components/native-select";
 
 const meta = {
-  title: 'Components/NativeSelect',
+  title: "Components/NativeSelect",
   component: NativeSelect,
 } satisfies Meta<typeof NativeSelect>;
 

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -6,10 +6,10 @@ import {
   BreadcrumbLink,
   BreadcrumbSeparator,
   BreadcrumbPage,
-} from '@packages/ui/components/breadcrumb';
+} from "@packages/ui/components/breadcrumb";
 
 const meta = {
-  title: 'Components/Breadcrumb',
+  title: "Components/Breadcrumb",
   component: Breadcrumb,
 } satisfies Meta<typeof Breadcrumb>;
 

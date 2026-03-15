@@ -1,7 +1,6 @@
-import type { UserConfig } from 'vitest/config';
+import type { UserConfig } from "vitest/config";
 
-export const sharedCoverageConfig: NonNullable<UserConfig['test']>['coverage'] =
-  {
-    provider: 'v8',
-    reporter: ['text', 'html', 'lcov'],
-  };
+export const sharedCoverageConfig: NonNullable<UserConfig["test"]>["coverage"] = {
+  provider: "v8",
+  reporter: ["text", "html", "lcov"],
+};

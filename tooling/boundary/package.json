@@ -2,8 +2,8 @@
   "name": "@tooling/boundary",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "bin": {
     "check-boundaries": "./check-boundaries.ts"
-  }
+  },
+  "type": "module"
 }

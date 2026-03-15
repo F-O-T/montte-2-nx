@@ -30,9 +30,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       <SidebarProvider className="flex-1">
         <AppSidebar />
         <SidebarInset className="flex flex-col overflow-hidden">
-          <main className="relative flex-1 overflow-y-auto p-4">
-            {children}
-          </main>
+          <main className="relative flex-1 overflow-y-auto p-4">{children}</main>
         </SidebarInset>
         <GlobalContextPanel />
       </SidebarProvider>

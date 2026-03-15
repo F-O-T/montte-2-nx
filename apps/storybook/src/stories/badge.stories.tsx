@@ -1,18 +1,18 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Badge } from '@packages/ui/components/badge';
+import type { Meta, StoryObj } from "@storybook/react";
+import { Badge } from "@packages/ui/components/badge";
 
 const meta = {
-  title: 'Components/Badge',
+  title: "Components/Badge",
   component: Badge,
   argTypes: {
     variant: {
-      control: 'select',
-      options: ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'],
+      control: "select",
+      options: ["default", "secondary", "destructive", "outline", "ghost", "link"],
     },
   },
   args: {
-    children: 'Badge',
-    variant: 'default',
+    children: "Badge",
+    variant: "default",
   },
 } satisfies Meta<typeof Badge>;
 
@@ -22,15 +22,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const Secondary: Story = {
-  args: { variant: 'secondary' },
+  args: { variant: "secondary" },
 };
 
 export const Destructive: Story = {
-  args: { variant: 'destructive' },
+  args: { variant: "destructive" },
 };
 
 export const Outline: Story = {
-  args: { variant: 'outline' },
+  args: { variant: "outline" },
 };
 
 export const AllVariants: Story = {

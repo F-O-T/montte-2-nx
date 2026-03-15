@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Item,
   ItemContent,
@@ -7,12 +7,12 @@ import {
   ItemMedia,
   ItemActions,
   ItemGroup,
-} from '@packages/ui/components/item';
-import { Button } from '@packages/ui/components/button';
-import { FileText, MoreHorizontal, Star } from 'lucide-react';
+} from "@packages/ui/components/item";
+import { Button } from "@packages/ui/components/button";
+import { FileText, MoreHorizontal, Star } from "lucide-react";
 
 const meta = {
-  title: 'Components/Item',
+  title: "Components/Item",
   component: Item,
 } satisfies Meta<typeof Item>;
 
@@ -44,7 +44,7 @@ export const Default: Story = {
 export const ListItems: Story = {
   render: () => (
     <ItemGroup>
-      {['Design System', 'Component Library', 'Documentation'].map((title) => (
+      {["Design System", "Component Library", "Documentation"].map((title) => (
         <Item key={title} variant="outline">
           <ItemMedia variant="icon">
             <FileText />

@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   ContextMenu,
   ContextMenuTrigger,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuSeparator,
-} from '@packages/ui/components/context-menu';
+} from "@packages/ui/components/context-menu";
 
 const meta = {
-  title: 'Components/ContextMenu',
+  title: "Components/ContextMenu",
   component: ContextMenu,
 } satisfies Meta<typeof ContextMenu>;
 

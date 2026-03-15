@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from "@storybook/react";
 import {
   Empty,
   EmptyMedia,
   EmptyTitle,
   EmptyDescription,
   EmptyHeader,
-} from '@packages/ui/components/empty';
-import { Inbox } from 'lucide-react';
+} from "@packages/ui/components/empty";
+import { Inbox } from "lucide-react";
 
 const meta = {
-  title: 'Components/Empty',
+  title: "Components/Empty",
   component: Empty,
 } satisfies Meta<typeof Empty>;
 

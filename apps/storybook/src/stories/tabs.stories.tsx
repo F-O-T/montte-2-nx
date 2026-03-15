@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { expect } from 'storybook/test';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@packages/ui/components/tabs';
+import type { Meta, StoryObj } from "@storybook/react";
+import { expect } from "storybook/test";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@packages/ui/components/tabs";
 
 const meta = {
-  title: 'Components/Tabs',
+  title: "Components/Tabs",
   component: Tabs,
 } satisfies Meta<typeof Tabs>;
 
@@ -30,9 +30,9 @@ export const Default: Story = {
     </Tabs>
   ),
   play: async ({ canvas, userEvent }) => {
-    const passwordTab = canvas.getByRole('tab', { name: 'Password' });
+    const passwordTab = canvas.getByRole("tab", { name: "Password" });
     await userEvent.click(passwordTab);
-    await expect(canvas.getByText('Change your password here.')).toBeVisible();
+    await expect(canvas.getByText("Change your password here.")).toBeVisible();
   },
 };
 
