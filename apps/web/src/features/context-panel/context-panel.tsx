@@ -1,22 +1,29 @@
-import { Button } from "@packages/ui/components/button";
+import { Button } from '@packages/ui/components/button';
 import {
   ContextPanel,
   ContextPanelContent,
   ContextPanelHeader,
   ContextPanelTitle,
-} from "@packages/ui/components/context-panel";
+} from '@packages/ui/components/context-panel';
 import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
   SidebarManager,
-} from "@packages/ui/components/sidebar";
-import { cn } from "@packages/ui/lib/utils";
-import { useStore } from "@tanstack/react-store";
-import { Info, X } from "lucide-react";
-import type React from "react";
-import { type ContextPanelTab, contextPanelStore } from "./context-panel-store";
-import { closeContextPanel, openContextPanel, setActiveTab } from "./use-context-panel";
+} from '@packages/ui/components/sidebar';
+import { cn } from '@packages/ui/lib/utils';
+import { useStore } from '@tanstack/react-store';
+import { Info, X } from 'lucide-react';
+import type React from 'react';
+import {
+  type ContextPanelTab,
+  contextPanelStore,
+} from '@web/features/context-panel/context-panel-store';
+import {
+  closeContextPanel,
+  openContextPanel,
+  setActiveTab,
+} from '@web/features/context-panel/use-context-panel';
 
 function InfoContent() {
   const { infoContent, pageActions } = useStore(contextPanelStore, (s) => s);
@@ -60,9 +67,9 @@ function InfoContent() {
 }
 
 const INFO_TAB: ContextPanelTab = {
-  id: "info",
+  id: 'info',
   icon: Info,
-  label: "Information",
+  label: 'Information',
   content: <InfoContent />,
   order: 0,
 };
@@ -78,12 +85,19 @@ function ContextPanelInner() {
   const activeTab = allTabs.find((t) => t.id === activeTabId) ?? allTabs[0];
 
   return (
-    <Sidebar className="px-0" collapsible="offcanvas" side="right" variant="inset">
+    <Sidebar
+      className="px-0"
+      collapsible="offcanvas"
+      side="right"
+      variant="inset"
+    >
       <SidebarHeader className="bg-background rounded-t-xl">
         <div className="flex-row flex items-center gap-2">
           {allTabs.map((tab) => (
             <Button
-              className={cn(activeTabId === tab.id && "bg-accent text-accent-foreground")}
+              className={cn(
+                activeTabId === tab.id && 'bg-accent text-accent-foreground',
+              )}
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               type="button"
@@ -114,7 +128,7 @@ export function GlobalContextPanel() {
       name="context-panel"
       onOpenChange={(open) => (open ? openContextPanel() : closeContextPanel())}
       open={isOpen}
-      style={{ "--sidebar-width": "28rem" } as React.CSSProperties}
+      style={{ '--sidebar-width': '28rem' } as React.CSSProperties}
     >
       <ContextPanelInner />
     </SidebarManager>

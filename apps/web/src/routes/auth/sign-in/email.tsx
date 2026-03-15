@@ -1,23 +1,28 @@
-import { Button } from "@packages/ui/components/button";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@packages/ui/components/field";
-import { Input } from "@packages/ui/components/input";
-import { PasswordInput } from "@packages/ui/components/password-input";
-import { useForm } from "@tanstack/react-form";
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
-import { type FormEvent, useCallback } from "react";
-import { toast } from "sonner";
-import { z } from "zod";
-import { authClient } from "@/lib/auth-client";
+import { Button } from '@packages/ui/components/button';
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@packages/ui/components/field';
+import { Input } from '@packages/ui/components/input';
+import { PasswordInput } from '@packages/ui/components/password-input';
+import { useForm } from '@tanstack/react-form';
+import { createFileRoute, Link, useRouter } from '@tanstack/react-router';
+import { ArrowLeft } from 'lucide-react';
+import { type FormEvent, useCallback } from 'react';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { authClient } from '@web/lib/auth-client';
 
-export const Route = createFileRoute("/auth/sign-in/email")({
+export const Route = createFileRoute('/auth/sign-in/email')({
   component: SignInEmailPage,
 });
 
 function SignInEmailPage() {
   const schema = z.object({
-    email: z.email("Please enter a valid email address."),
-    password: z.string().min(8, "Password must be at least 8 characters."),
+    email: z.email('Please enter a valid email address.'),
+    password: z.string().min(8, 'Password must be at least 8 characters.'),
   });
   const router = useRouter();
 
@@ -33,13 +38,13 @@ function SignInEmailPage() {
             toast.error(error.message);
           },
           onRequest: () => {
-            toast.loading("Signing in...", {
-              id: "sign-in-email",
+            toast.loading('Signing in...', {
+              id: 'sign-in-email',
             });
           },
           onSuccess: () => {
-            toast.success("Welcome back!", { id: "sign-in-email" });
-            router.navigate({ to: "/auth/callback" });
+            toast.success('Welcome back!', { id: 'sign-in-email' });
+            router.navigate({ to: '/auth/callback' });
           },
         },
       );
@@ -49,8 +54,8 @@ function SignInEmailPage() {
 
   const form = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     onSubmit: async ({ value, formApi }) => {
       const { email, password } = value;
@@ -81,7 +86,9 @@ function SignInEmailPage() {
       </Link>
 
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-semibold font-serif">Sign in with Email</h1>
+        <h1 className="text-3xl font-semibold font-serif">
+          Sign in with Email
+        </h1>
         <p className="text-muted-foreground text-sm">
           Use your email and password to access your account.
         </p>
@@ -91,7 +98,8 @@ function SignInEmailPage() {
         <FieldGroup>
           <form.Field name="email">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -114,7 +122,8 @@ function SignInEmailPage() {
         <FieldGroup>
           <form.Field name="password">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field aria-required data-invalid={isInvalid}>
                   <div className="flex justify-between items-center">
@@ -157,7 +166,10 @@ function SignInEmailPage() {
       <div className="text-sm text-center">
         <div className="flex gap-1 justify-center items-center">
           <span>First time here? </span>
-          <Link className="text-primary font-medium hover:underline" to="/auth/sign-up">
+          <Link
+            className="text-primary font-medium hover:underline"
+            to="/auth/sign-up"
+          >
             Create account
           </Link>
         </div>

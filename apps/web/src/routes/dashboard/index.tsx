@@ -1,10 +1,10 @@
-import { useQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
+import { useQuery } from '@tanstack/react-query';
+import { createFileRoute } from '@tanstack/react-router';
 
-import { PageHeader } from "@/components/page-header";
-import { orpc } from "@/utils/orpc";
+import { PageHeader } from '@web/components/page-header';
+import { orpc } from '@web/utils/orpc';
 
-export const Route = createFileRoute("/dashboard/")({
+export const Route = createFileRoute('/dashboard/')({
   component: DashboardHome,
 });
 
@@ -14,7 +14,7 @@ function DashboardHome() {
   return (
     <div className="flex flex-col gap-4">
       <PageHeader title="Dashboard" />
-      <p>{privateData.data?.message ?? ""}</p>
+      <p>{privateData.data?.message ?? ''}</p>
     </div>
   );
 }

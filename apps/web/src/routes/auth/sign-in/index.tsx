@@ -1,16 +1,16 @@
-import { Button } from "@packages/ui/components/button";
-import { Separator } from "@packages/ui/components/separator";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { KeyRound, Sparkles } from "lucide-react";
-import { useTransition } from "react";
-import { z } from "zod";
-import { authClient } from "@/lib/auth-client";
+import { Button } from '@packages/ui/components/button';
+import { Separator } from '@packages/ui/components/separator';
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { KeyRound, Sparkles } from 'lucide-react';
+import { useTransition } from 'react';
+import { z } from 'zod';
+import { authClient } from '@web/lib/auth-client';
 
 const signInSearchSchema = z.object({
   redirect: z.string().optional(),
 });
 
-export const Route = createFileRoute("/auth/sign-in/")({
+export const Route = createFileRoute('/auth/sign-in/')({
   validateSearch: signInSearchSchema,
   component: SignInPage,
 });
@@ -42,8 +42,8 @@ export function SignInPage() {
   const handleGoogleSignIn = () => {
     startTransition(async () => {
       await authClient.signIn.social({
-        provider: "google",
-        callbackURL: "/auth/callback",
+        provider: 'google',
+        callbackURL: '/auth/callback',
       });
     });
   };
@@ -52,7 +52,9 @@ export function SignInPage() {
     <section className="space-y-8 w-full">
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-semibold font-serif">Sign In</h1>
-        <p className="text-muted-foreground text-sm">Welcome back. Sign in to continue.</p>
+        <p className="text-muted-foreground text-sm">
+          Welcome back. Sign in to continue.
+        </p>
       </div>
 
       <div className="space-y-3">
@@ -92,7 +94,10 @@ export function SignInPage() {
       <div className="text-sm text-center space-y-4">
         <div className="flex gap-1 justify-center items-center">
           <span>First time here? </span>
-          <Link className="text-primary font-medium hover:underline" to="/auth/sign-up">
+          <Link
+            className="text-primary font-medium hover:underline"
+            to="/auth/sign-up"
+          >
             Create account
           </Link>
         </div>

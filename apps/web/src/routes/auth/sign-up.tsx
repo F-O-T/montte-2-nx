@@ -1,23 +1,28 @@
-import { Button } from "@packages/ui/components/button";
-import { FieldError, FieldGroup, FieldLabel, Field } from "@packages/ui/components/field";
-import { Input } from "@packages/ui/components/input";
-import { PasswordInput } from "@packages/ui/components/password-input";
-import { defineStepper } from "@packages/ui/components/stepper";
-import { useForm } from "@tanstack/react-form";
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { type FormEvent, useCallback } from "react";
-import { toast } from "sonner";
-import z from "zod";
-import { authClient } from "@/lib/auth-client";
+import { Button } from '@packages/ui/components/button';
+import {
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  Field,
+} from '@packages/ui/components/field';
+import { Input } from '@packages/ui/components/input';
+import { PasswordInput } from '@packages/ui/components/password-input';
+import { defineStepper } from '@packages/ui/components/stepper';
+import { useForm } from '@tanstack/react-form';
+import { createFileRoute, Link, useRouter } from '@tanstack/react-router';
+import { type FormEvent, useCallback } from 'react';
+import { toast } from 'sonner';
+import z from 'zod';
+import { authClient } from '@web/lib/auth-client';
 
 const steps = [
-  { id: "basic-info", title: "basic-info" },
-  { id: "password", title: "password" },
+  { id: 'basic-info', title: 'basic-info' },
+  { id: 'password', title: 'password' },
 ] as const;
 
 const { Stepper } = defineStepper(...steps);
 
-export const Route = createFileRoute("/auth/sign-up")({
+export const Route = createFileRoute('/auth/sign-up')({
   component: SignUpPage,
 });
 
@@ -26,13 +31,13 @@ function SignUpPage() {
   const schema = z
     .object({
       confirmPassword: z.string(),
-      email: z.email("Please enter a valid email address."),
-      name: z.string().min(2, "Name must be at least 2 characters."),
-      password: z.string().min(8, "Password must be at least 8 characters."),
+      email: z.email('Please enter a valid email address.'),
+      name: z.string().min(2, 'Name must be at least 2 characters.'),
+      password: z.string().min(8, 'Password must be at least 8 characters.'),
     })
     .refine((data) => data.password === data.confirmPassword, {
-      message: "Passwords do not match.",
-      path: ["confirmPassword"],
+      message: 'Passwords do not match.',
+      path: ['confirmPassword'],
     });
 
   const handleSignUp = useCallback(
@@ -48,13 +53,13 @@ function SignUpPage() {
             toast.error(error.message);
           },
           onRequest: () => {
-            toast.loading("Creating your account...");
+            toast.loading('Creating your account...');
           },
           onSuccess: () => {
-            toast.success("Account created successfully!");
+            toast.success('Account created successfully!');
             router.navigate({
               search: { email },
-              to: "/auth/email-verification",
+              to: '/auth/email-verification',
             });
           },
         },
@@ -65,10 +70,10 @@ function SignUpPage() {
 
   const form = useForm({
     defaultValues: {
-      confirmPassword: "",
-      email: "",
-      name: "",
-      password: "",
+      confirmPassword: '',
+      email: '',
+      name: '',
+      password: '',
     },
     onSubmit: async ({ value, formApi }) => {
       const { email, name, password } = value;
@@ -95,7 +100,8 @@ function SignUpPage() {
         <FieldGroup>
           <form.Field name="name">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Name</FieldLabel>
@@ -118,7 +124,8 @@ function SignUpPage() {
         <FieldGroup>
           <form.Field name="email">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -149,7 +156,8 @@ function SignUpPage() {
         <FieldGroup>
           <form.Field name="password">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -172,7 +180,8 @@ function SignUpPage() {
         <FieldGroup>
           <form.Field name="confirmPassword">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
@@ -201,8 +210,12 @@ function SignUpPage() {
       {({ methods }) => (
         <section className="space-y-6 w-full">
           <div className="text-center space-y-2">
-            <h1 className="text-3xl font-semibold font-serif">Create Account</h1>
-            <p className="text-muted-foreground text-sm">Create your account to get started.</p>
+            <h1 className="text-3xl font-semibold font-serif">
+              Create Account
+            </h1>
+            <p className="text-muted-foreground text-sm">
+              Create your account to get started.
+            </p>
           </div>
 
           <div className="space-y-6">
@@ -213,7 +226,7 @@ function SignUpPage() {
             </Stepper.Navigation>
             <form className="space-y-4" onSubmit={handleSubmit}>
               {methods.flow.switch({
-                "basic-info": () => <BasicInfoStep />,
+                'basic-info': () => <BasicInfoStep />,
                 password: () => <PasswordStep />,
               })}
               <Stepper.Controls className="flex w-full justify-between">
@@ -231,7 +244,9 @@ function SignUpPage() {
                     {(formState) => (
                       <Button
                         className="h-11"
-                        disabled={!formState.canSubmit || formState.isSubmitting}
+                        disabled={
+                          !formState.canSubmit || formState.isSubmitting
+                        }
                         type="submit"
                         variant="default"
                       >
@@ -265,7 +280,10 @@ function SignUpPage() {
           <div className="text-sm text-center space-y-4">
             <div className="flex gap-1 justify-center items-center">
               <span>Already have an account?</span>
-              <Link className="text-primary font-medium hover:underline" to="/auth/sign-in">
+              <Link
+                className="text-primary font-medium hover:underline"
+                to="/auth/sign-in"
+              >
                 Sign in
               </Link>
             </div>

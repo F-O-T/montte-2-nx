@@ -1,9 +1,9 @@
-import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute, useRouter } from '@tanstack/react-router';
+import { useEffect } from 'react';
 
-import { getUser } from "@/functions/get-user";
+import { getUser } from '@web/functions/get-user';
 
-export const Route = createFileRoute("/auth/callback")({
+export const Route = createFileRoute('/auth/callback')({
   loader: async () => {
     const session = await getUser();
     return { session };
@@ -17,9 +17,9 @@ function AuthCallbackPage() {
 
   useEffect(() => {
     if (session?.user) {
-      router.navigate({ to: "/dashboard" });
+      router.navigate({ to: '/dashboard' });
     } else {
-      router.navigate({ to: "/auth/sign-in" });
+      router.navigate({ to: '/auth/sign-in' });
     }
   }, [session, router]);
 

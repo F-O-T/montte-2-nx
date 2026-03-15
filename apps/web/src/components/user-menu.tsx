@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "@tanstack/react-router";
-import { Button } from "@packages/ui/components/button";
+import { Link, useNavigate } from '@tanstack/react-router';
+import { Button } from '@packages/ui/components/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,11 +8,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@packages/ui/components/dropdown-menu";
-import { Skeleton } from "@packages/ui/components/skeleton";
+} from '@packages/ui/components/dropdown-menu';
+import { Skeleton } from '@packages/ui/components/skeleton';
 
-import { authClient } from "@/lib/auth-client";
-import { m } from "@/paraglide/messages";
+import { authClient } from '@web/lib/auth-client';
+import { m } from '@web/paraglide/messages';
 
 export default function UserMenu() {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export default function UserMenu() {
                 fetchOptions: {
                   onSuccess: () => {
                     navigate({
-                      to: "/",
+                      to: '/',
                     });
                   },
                 },

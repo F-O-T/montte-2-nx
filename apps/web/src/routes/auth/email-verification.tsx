@@ -1,23 +1,28 @@
-import { Button } from "@packages/ui/components/button";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@packages/ui/components/field";
+import { Button } from '@packages/ui/components/button';
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@packages/ui/components/field';
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@packages/ui/components/input-otp";
-import { useForm } from "@tanstack/react-form";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
-import { type FormEvent, useCallback } from "react";
-import { toast } from "sonner";
-import z from "zod";
-import { authClient } from "@/lib/auth-client";
+} from '@packages/ui/components/input-otp';
+import { useForm } from '@tanstack/react-form';
+import { createFileRoute, useRouter } from '@tanstack/react-router';
+import { type FormEvent, useCallback } from 'react';
+import { toast } from 'sonner';
+import z from 'zod';
+import { authClient } from '@web/lib/auth-client';
 
 const searchParams = z.object({
   email: z.email(),
 });
 
-export const Route = createFileRoute("/auth/email-verification")({
+export const Route = createFileRoute('/auth/email-verification')({
   component: EmailVerificationPage,
   validateSearch: searchParams,
 });
@@ -25,7 +30,7 @@ export const Route = createFileRoute("/auth/email-verification")({
 function EmailVerificationPage() {
   const { email } = Route.useSearch();
   const schema = z.object({
-    otp: z.string().min(6, "Code must be 6 characters.").max(6),
+    otp: z.string().min(6, 'Code must be 6 characters.').max(6),
   });
 
   const router = useRouter();
@@ -34,17 +39,17 @@ function EmailVerificationPage() {
     await authClient.emailOtp.sendVerificationOtp(
       {
         email,
-        type: "email-verification",
+        type: 'email-verification',
       },
       {
         onError: ({ error }) => {
           toast.error(error.message);
         },
         onRequest: () => {
-          toast.loading("Processing...");
+          toast.loading('Processing...');
         },
         onSuccess: () => {
-          toast.success("Code resent!");
+          toast.success('Code resent!');
         },
       },
     );
@@ -62,11 +67,11 @@ function EmailVerificationPage() {
             toast.error(error.message);
           },
           onRequest: () => {
-            toast.loading("Verifying...");
+            toast.loading('Verifying...');
           },
           onSuccess: () => {
-            toast.success("Email verified!");
-            router.navigate({ to: "/auth/callback" });
+            toast.success('Email verified!');
+            router.navigate({ to: '/auth/callback' });
           },
         },
       );
@@ -76,7 +81,7 @@ function EmailVerificationPage() {
 
   const form = useForm({
     defaultValues: {
-      otp: "",
+      otp: '',
     },
     onSubmit: async ({ value, formApi }) => {
       await handleVerifyEmail(value.otp);
@@ -99,7 +104,9 @@ function EmailVerificationPage() {
   return (
     <section className="space-y-6 w-full">
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-semibold font-serif">Email Verification</h1>
+        <h1 className="text-3xl font-semibold font-serif">
+          Email Verification
+        </h1>
         <p className="text-muted-foreground text-sm">
           Enter the verification code sent to your email.
         </p>
@@ -110,9 +117,13 @@ function EmailVerificationPage() {
           <FieldGroup>
             <form.Field name="otp">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
-                  <Field className="flex flex-col items-center" data-invalid={isInvalid}>
+                  <Field
+                    className="flex flex-col items-center"
+                    data-invalid={isInvalid}
+                  >
                     <FieldLabel>OTP Code</FieldLabel>
                     <InputOTP
                       aria-invalid={isInvalid}
@@ -140,7 +151,9 @@ function EmailVerificationPage() {
                         </InputOTPGroup>
                       </div>
                     </InputOTP>
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -161,7 +174,11 @@ function EmailVerificationPage() {
       </div>
 
       <div className="text-sm text-center">
-        <Button className="text-muted-foreground" onClick={handleResendEmail} variant="link">
+        <Button
+          className="text-muted-foreground"
+          onClick={handleResendEmail}
+          variant="link"
+        >
           Resend Code
         </Button>
       </div>

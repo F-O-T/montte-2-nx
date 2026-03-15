@@ -1,27 +1,30 @@
-import { useForm } from "@tanstack/react-form";
-import { useNavigate } from "@tanstack/react-router";
-import { Button } from "@packages/ui/components/button";
-import { Input } from "@packages/ui/components/input";
-import { Label } from "@packages/ui/components/label";
-import { toast } from "sonner";
-import z from "zod";
+import { useForm } from '@tanstack/react-form';
+import { useNavigate } from '@tanstack/react-router';
+import { Button } from '@packages/ui/components/button';
+import { Input } from '@packages/ui/components/input';
+import { Label } from '@packages/ui/components/label';
+import { toast } from 'sonner';
+import z from 'zod';
 
-import { authClient } from "@/lib/auth-client";
-import { m } from "@/paraglide/messages";
+import Loader from '@web/components/loader';
+import { authClient } from '@web/lib/auth-client';
+import { m } from '@web/paraglide/messages';
 
-import Loader from "./loader";
-
-export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () => void }) {
+export default function SignUpForm({
+  onSwitchToSignIn,
+}: {
+  onSwitchToSignIn: () => void;
+}) {
   const navigate = useNavigate({
-    from: "/",
+    from: '/',
   });
   const { isPending } = authClient.useSession();
 
   const form = useForm({
     defaultValues: {
-      email: "",
-      password: "",
-      name: "",
+      email: '',
+      password: '',
+      name: '',
     },
     onSubmit: async ({ value }) => {
       await authClient.signUp.email(
@@ -33,7 +36,7 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
         {
           onSuccess: () => {
             navigate({
-              to: "/dashboard",
+              to: '/dashboard',
             });
             toast.success(m.sign_up_successful());
           },
@@ -58,7 +61,9 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
 
   return (
     <div className="mx-auto w-full mt-10 max-w-md p-6">
-      <h1 className="mb-6 text-center text-3xl font-bold">{m.create_account()}</h1>
+      <h1 className="mb-6 text-center text-3xl font-bold">
+        {m.create_account()}
+      </h1>
 
       <form
         onSubmit={(e) => {
@@ -137,10 +142,17 @@ export default function SignUpForm({ onSwitchToSignIn }: { onSwitchToSignIn: () 
         </div>
 
         <form.Subscribe
-          selector={(state) => ({ canSubmit: state.canSubmit, isSubmitting: state.isSubmitting })}
+          selector={(state) => ({
+            canSubmit: state.canSubmit,
+            isSubmitting: state.isSubmitting,
+          })}
         >
           {({ canSubmit, isSubmitting }) => (
-            <Button type="submit" className="w-full" disabled={!canSubmit || isSubmitting}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={!canSubmit || isSubmitting}
+            >
               {isSubmitting ? m.submitting() : m.sign_up()}
             </Button>
           )}

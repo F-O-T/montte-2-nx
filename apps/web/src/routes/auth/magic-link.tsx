@@ -1,22 +1,22 @@
-import { Button } from "@packages/ui/components/button";
+import { Button } from '@packages/ui/components/button';
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@packages/ui/components/field";
-import { Input } from "@packages/ui/components/input";
-import { Spinner } from "@packages/ui/components/spinner";
-import { useForm } from "@tanstack/react-form";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, Mail } from "lucide-react";
-import { type FormEvent, useCallback, useState } from "react";
-import { toast } from "sonner";
-import { z } from "zod";
-import { authClient } from "@/lib/auth-client";
+} from '@packages/ui/components/field';
+import { Input } from '@packages/ui/components/input';
+import { Spinner } from '@packages/ui/components/spinner';
+import { useForm } from '@tanstack/react-form';
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { ArrowLeft, Mail } from 'lucide-react';
+import { type FormEvent, useCallback, useState } from 'react';
+import { toast } from 'sonner';
+import { z } from 'zod';
+import { authClient } from '@web/lib/auth-client';
 
-export const Route = createFileRoute("/auth/magic-link")({
+export const Route = createFileRoute('/auth/magic-link')({
   component: MagicLinkPage,
 });
 
@@ -24,7 +24,7 @@ function MagicLinkPage() {
   const [isSent, setIsSent] = useState(false);
 
   const schema = z.object({
-    email: z.email("Please enter a valid email address."),
+    email: z.email('Please enter a valid email address.'),
   });
 
   const handleMagicLinkSignIn = useCallback(async (email: string) => {
@@ -38,11 +38,13 @@ function MagicLinkPage() {
           toast.error(error.message);
         },
         onRequest: () => {
-          toast.loading("Sending access link...");
+          toast.loading('Sending access link...');
         },
         onSuccess: async () => {
           try {
-            const res = await fetch(`/api/auth/dev/magic-link?email=${encodeURIComponent(email)}`);
+            const res = await fetch(
+              `/api/auth/dev/magic-link?email=${encodeURIComponent(email)}`,
+            );
             const data = await res.json();
             if (data.url) {
               window.location.href = data.url;
@@ -52,7 +54,7 @@ function MagicLinkPage() {
             // Not in dev mode or endpoint unavailable
           }
           setIsSent(true);
-          toast.success("Link sent! Check your email.");
+          toast.success('Link sent! Check your email.');
         },
       },
     );
@@ -60,7 +62,7 @@ function MagicLinkPage() {
 
   const form = useForm({
     defaultValues: {
-      email: "",
+      email: '',
     },
     onSubmit: async ({ value }) => {
       await handleMagicLinkSignIn(value.email);
@@ -90,14 +92,21 @@ function MagicLinkPage() {
           </div>
 
           <div className="space-y-2">
-            <h1 className="text-3xl font-semibold font-serif">Check your email</h1>
+            <h1 className="text-3xl font-semibold font-serif">
+              Check your email
+            </h1>
             <p className="text-muted-foreground text-sm max-w-sm mx-auto">
-              We sent a link to your email. Click it to access your account instantly.
+              We sent a link to your email. Click it to access your account
+              instantly.
             </p>
           </div>
 
           <div className="flex flex-col gap-3 pt-2">
-            <Button className="h-11" onClick={() => setIsSent(false)} variant="outline">
+            <Button
+              className="h-11"
+              onClick={() => setIsSent(false)}
+              variant="outline"
+            >
               Try another email
             </Button>
             <Link to="/auth/sign-in">
@@ -122,9 +131,12 @@ function MagicLinkPage() {
       </Link>
 
       <div className="text-center space-y-2">
-        <h1 className="text-3xl font-semibold font-serif">Passwordless Access</h1>
+        <h1 className="text-3xl font-semibold font-serif">
+          Passwordless Access
+        </h1>
         <p className="text-muted-foreground text-sm">
-          Receive a link in your email to access your account without a password.
+          Receive a link in your email to access your account without a
+          password.
         </p>
       </div>
 
@@ -132,7 +144,8 @@ function MagicLinkPage() {
         <FieldGroup>
           <form.Field name="email">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -159,20 +172,24 @@ function MagicLinkPage() {
               disabled={!formState.canSubmit || formState.isSubmitting}
               type="submit"
             >
-              {formState.isSubmitting ? <Spinner /> : "Send link"}
+              {formState.isSubmitting ? <Spinner /> : 'Send link'}
             </Button>
           )}
         </form.Subscribe>
       </form>
 
       <FieldDescription className="text-center">
-        The link expires in 15 minutes. Check your spam folder if you don't see the email.
+        The link expires in 15 minutes. Check your spam folder if you don't see
+        the email.
       </FieldDescription>
 
       <div className="text-sm text-center">
         <div className="flex gap-1 justify-center items-center">
           <span>First time here? </span>
-          <Link className="text-primary font-medium hover:underline" to="/auth/sign-up">
+          <Link
+            className="text-primary font-medium hover:underline"
+            to="/auth/sign-up"
+          >
             Create account
           </Link>
         </div>

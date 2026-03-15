@@ -1,31 +1,36 @@
-import { Button } from "@packages/ui/components/button";
-import { Field, FieldError, FieldGroup, FieldLabel } from "@packages/ui/components/field";
-import { Input } from "@packages/ui/components/input";
+import { Button } from '@packages/ui/components/button';
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@packages/ui/components/field';
+import { Input } from '@packages/ui/components/input';
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@packages/ui/components/input-otp";
-import { PasswordInput } from "@packages/ui/components/password-input";
-import { defineStepper } from "@packages/ui/components/stepper";
-import { useForm } from "@tanstack/react-form";
-import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
-import { useCallback } from "react";
-import { toast } from "sonner";
-import z from "zod";
-import { authClient } from "@/lib/auth-client";
+} from '@packages/ui/components/input-otp';
+import { PasswordInput } from '@packages/ui/components/password-input';
+import { defineStepper } from '@packages/ui/components/stepper';
+import { useForm } from '@tanstack/react-form';
+import { createFileRoute, Link, useRouter } from '@tanstack/react-router';
+import { ArrowLeft } from 'lucide-react';
+import { useCallback } from 'react';
+import { toast } from 'sonner';
+import z from 'zod';
+import { authClient } from '@web/lib/auth-client';
 
 const steps = [
-  { id: "enter-email", title: "enter-email" },
-  { id: "enter-otp", title: "enter-otp" },
-  { id: "enter-password", title: "enter-password" },
+  { id: 'enter-email', title: 'enter-email' },
+  { id: 'enter-otp', title: 'enter-otp' },
+  { id: 'enter-password', title: 'enter-password' },
 ] as const;
 
 const { Stepper } = defineStepper(...steps);
 
-export const Route = createFileRoute("/auth/forgot-password")({
+export const Route = createFileRoute('/auth/forgot-password')({
   component: ForgotPasswordPage,
 });
 
@@ -34,30 +39,30 @@ function ForgotPasswordPage() {
   const schema = z
     .object({
       confirmPassword: z.string(),
-      email: z.email("Please enter a valid email address."),
-      otp: z.string().min(6, "Code must be at least 6 characters."),
-      password: z.string().min(8, "Password must be at least 8 characters."),
+      email: z.email('Please enter a valid email address.'),
+      otp: z.string().min(6, 'Code must be at least 6 characters.'),
+      password: z.string().min(8, 'Password must be at least 8 characters.'),
     })
     .refine((data) => data.password === data.confirmPassword, {
-      message: "Passwords do not match.",
-      path: ["confirmPassword"],
+      message: 'Passwords do not match.',
+      path: ['confirmPassword'],
     });
 
   const handleSendOtp = useCallback(async (email: string) => {
     await authClient.emailOtp.sendVerificationOtp(
       {
         email,
-        type: "forget-password",
+        type: 'forget-password',
       },
       {
         onError: ({ error }) => {
           toast.error(error.message);
         },
         onRequest: () => {
-          toast.loading("Processing...");
+          toast.loading('Processing...');
         },
         onSuccess: () => {
-          toast.success("Code sent!");
+          toast.success('Code sent!');
         },
       },
     );
@@ -76,12 +81,12 @@ function ForgotPasswordPage() {
             toast.error(error.message);
           },
           onRequest: () => {
-            toast.loading("Resetting...");
+            toast.loading('Resetting...');
           },
           onSuccess: () => {
-            toast.success("Password reset successfully!");
+            toast.success('Password reset successfully!');
             router.navigate({
-              to: "/auth/sign-in",
+              to: '/auth/sign-in',
             });
           },
         },
@@ -92,10 +97,10 @@ function ForgotPasswordPage() {
 
   const form = useForm({
     defaultValues: {
-      confirmPassword: "",
-      email: "",
-      otp: "",
-      password: "",
+      confirmPassword: '',
+      email: '',
+      otp: '',
+      password: '',
     },
     onSubmit: async ({ value }) => {
       await handleResetPassword(value.email, value.otp, value.password);
@@ -119,7 +124,8 @@ function ForgotPasswordPage() {
       <FieldGroup>
         <form.Field name="email">
           {(field) => {
-            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <Field data-invalid={isInvalid}>
                 <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -148,7 +154,8 @@ function ForgotPasswordPage() {
       <FieldGroup>
         <form.Field name="otp">
           {(field) => {
-            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <Field data-invalid={isInvalid}>
                 <FieldLabel htmlFor={field.name}>OTP Code</FieldLabel>
@@ -194,7 +201,8 @@ function ForgotPasswordPage() {
         <FieldGroup>
           <form.Field name="password">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -217,7 +225,8 @@ function ForgotPasswordPage() {
         <FieldGroup>
           <form.Field name="confirmPassword">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
@@ -253,13 +262,15 @@ function ForgotPasswordPage() {
           </Link>
 
           <div className="text-center space-y-2">
-            <h1 className="text-3xl font-semibold font-serif">Forgot Password</h1>
+            <h1 className="text-3xl font-semibold font-serif">
+              Forgot Password
+            </h1>
             <p className="text-muted-foreground text-sm">
-              {methods.state.current.data.id === "enter-email"
-                ? "Enter your email to receive a recovery code"
-                : methods.state.current.data.id === "enter-otp"
-                  ? "Enter the code sent to your email"
-                  : "Enter your new password"}
+              {methods.state.current.data.id === 'enter-email'
+                ? 'Enter your email to receive a recovery code'
+                : methods.state.current.data.id === 'enter-otp'
+                  ? 'Enter the code sent to your email'
+                  : 'Enter your new password'}
             </p>
           </div>
 
@@ -271,9 +282,9 @@ function ForgotPasswordPage() {
             </Stepper.Navigation>
             <form className="space-y-4" onSubmit={handleSubmit}>
               {methods.flow.switch({
-                "enter-email": () => <EmailStep />,
-                "enter-otp": () => <OtpStep />,
-                "enter-password": () => <PasswordStep />,
+                'enter-email': () => <EmailStep />,
+                'enter-otp': () => <OtpStep />,
+                'enter-password': () => <PasswordStep />,
               })}
               <Stepper.Controls className="flex w-full justify-between">
                 <Button
@@ -289,7 +300,9 @@ function ForgotPasswordPage() {
                     {(formState) => (
                       <Button
                         className="flex gap-2 items-center justify-center"
-                        disabled={!formState.canSubmit || formState.isSubmitting}
+                        disabled={
+                          !formState.canSubmit || formState.isSubmitting
+                        }
                         type="submit"
                         variant="default"
                       >
@@ -297,7 +310,7 @@ function ForgotPasswordPage() {
                       </Button>
                     )}
                   </form.Subscribe>
-                ) : methods.flow.is("enter-email") ? (
+                ) : methods.flow.is('enter-email') ? (
                   <form.Subscribe
                     selector={(state) => ({
                       emailValid: state.fieldMeta.email?.isValid,
@@ -318,7 +331,10 @@ function ForgotPasswordPage() {
                     )}
                   </form.Subscribe>
                 ) : (
-                  <Button onClick={() => methods.navigation.next()} type="button">
+                  <Button
+                    onClick={() => methods.navigation.next()}
+                    type="button"
+                  >
                     Next
                   </Button>
                 )}

@@ -1,13 +1,18 @@
-import { createFileRoute, Outlet, redirect, useLocation } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Outlet,
+  redirect,
+  useLocation,
+} from '@tanstack/react-router';
 
-import { getUser } from "@/functions/get-user";
+import { getUser } from '@web/functions/get-user';
 
-export const Route = createFileRoute("/auth")({
+export const Route = createFileRoute('/auth')({
   beforeLoad: async ({ location }) => {
     const session = await getUser();
 
-    if (session?.user && !location.pathname.includes("/auth/callback")) {
-      throw redirect({ to: "/auth/callback" });
+    if (session?.user && !location.pathname.includes('/auth/callback')) {
+      throw redirect({ to: '/auth/callback' });
     }
   },
   component: AuthLayout,
@@ -37,13 +42,17 @@ function AuthLayout() {
 
         <div className="relative z-10">
           <div className="flex items-center gap-3">
-            <span className="text-xl font-semibold text-white">Working App</span>
+            <span className="text-xl font-semibold text-white">
+              Working App
+            </span>
           </div>
         </div>
 
         <div className="relative z-10 space-y-8">
           <div className="text-center space-y-4">
-            <h2 className="text-2xl xl:text-3xl font-serif font-semibold text-white">Welcome</h2>
+            <h2 className="text-2xl xl:text-3xl font-serif font-semibold text-white">
+              Welcome
+            </h2>
             <p className="text-white/70 text-sm xl:text-base max-w-sm mx-auto">
               Sign in to access your dashboard.
             </p>

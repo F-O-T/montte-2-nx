@@ -1,12 +1,12 @@
-import { QueryClientProvider } from "@tanstack/react-query";
-import { createRouter as createTanStackRouter } from "@tanstack/react-router";
+import { QueryClientProvider } from '@tanstack/react-query';
+import { createRouter as createTanStackRouter } from '@tanstack/react-router';
 
-import "@tooling/css/globals.css";
-import Loader from "./components/loader";
-import { m } from "./paraglide/messages";
-import { deLocalizeUrl, localizeUrl } from "./paraglide/runtime";
-import { routeTree } from "./routeTree.gen";
-import { orpc, queryClient } from "./utils/orpc";
+import '@tooling/css/globals.css';
+import Loader from '@web/components/loader';
+import { m } from '@web/paraglide/messages';
+import { deLocalizeUrl, localizeUrl } from '@web/paraglide/runtime';
+import { routeTree } from '@web/routeTree.gen';
+import { orpc, queryClient } from '@web/utils/orpc';
 
 export const getRouter = () => {
   const router = createTanStackRouter({
@@ -27,7 +27,7 @@ export const getRouter = () => {
   return router;
 };
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface Register {
     router: ReturnType<typeof getRouter>;
   }

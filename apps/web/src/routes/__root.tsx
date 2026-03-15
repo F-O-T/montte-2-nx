@@ -1,16 +1,20 @@
-import type { QueryClient } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { Toaster } from "@packages/ui/components/sonner";
+import type { QueryClient } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  createRootRouteWithContext,
+} from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
+import { Toaster } from '@packages/ui/components/sonner';
 
-import { m } from "@/paraglide/messages";
-import { getLocale } from "@/paraglide/runtime";
-import type { orpc } from "@/utils/orpc";
+import { ThemeProvider, ThemeScript } from '@web/components/theme-provider';
+import { m } from '@web/paraglide/messages';
+import { getLocale } from '@web/paraglide/runtime';
+import type { orpc } from '@web/utils/orpc';
 
-import { ThemeProvider, ThemeScript } from "../components/theme-provider";
-
-import appCss from "@tooling/css/globals.css?url";
+import appCss from '@tooling/css/globals.css?url';
 export interface RouterAppContext {
   orpc: typeof orpc;
   queryClient: QueryClient;
@@ -20,11 +24,11 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
   head: () => ({
     meta: [
       {
-        charSet: "utf-8",
+        charSet: 'utf-8',
       },
       {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1",
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1',
       },
       {
         title: m.app_title(),
@@ -32,7 +36,7 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
     ],
     links: [
       {
-        rel: "stylesheet",
+        rel: 'stylesheet',
         href: appCss,
       },
     ],

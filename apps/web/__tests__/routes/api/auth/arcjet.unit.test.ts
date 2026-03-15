@@ -4,7 +4,7 @@ import {
   createArcjetDeniedResponse,
   protectBetterAuthRequest,
   shouldProtectBetterAuthRequest,
-} from '../../../../src/routes/api/auth/arcjet';
+} from '@web/routes/api/auth/arcjet';
 
 function createDecision(options?: {
   denied?: boolean;
