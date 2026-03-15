@@ -8,6 +8,7 @@
     "dev": "vite dev"
   },
   "dependencies": {
+    "@core/arcjet": "workspace:*",
     "@core/auth": "workspace:*",
     "@core/env": "workspace:*",
     "@orpc/client": "catalog:",

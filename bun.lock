@@ -64,6 +64,7 @@
     "apps/web": {
       "name": "web",
       "dependencies": {
+        "@core/arcjet": "workspace:*",
         "@core/auth": "workspace:*",
         "@core/env": "workspace:*",
         "@orpc/client": "catalog:",

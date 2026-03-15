@@ -1,16 +1,16 @@
-import { db } from "@core/db";
-import * as schema from "@core/db/schema/auth";
-import { env } from "@core/env";
-import { betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { magicLink } from "better-auth/plugins/magic-link";
-import { emailOTP } from "better-auth/plugins/email-otp";
-import { organization } from "better-auth/plugins";
-import { tanstackStartCookies } from "better-auth/tanstack-start";
+import { db } from '@core/db';
+import * as schema from '@core/db/schema/auth';
+import { env } from '@core/env';
+import { betterAuth } from 'better-auth';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { magicLink } from 'better-auth/plugins/magic-link';
+import { emailOTP } from 'better-auth/plugins/email-otp';
+import { organization } from 'better-auth/plugins';
+import { tanstackStartCookies } from 'better-auth/tanstack-start';
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
-    provider: "pg",
+    provider: 'pg',
     schema: schema,
   }),
   trustedOrigins: [env.CORS_ORIGIN],
@@ -37,7 +37,9 @@ export const auth = betterAuth({
     organization({
       organizationLimit: 3,
       sendInvitationEmail: async (data) => {
-        console.log(`[DEV] Organization invitation for ${data.email}: ${data.id}`);
+        console.log(
+          `[DEV] Organization invitation for ${data.email}: ${data.id}`,
+        );
       },
       teams: {
         enabled: true,
