@@ -45,13 +45,13 @@ export function shouldProtectBetterAuthRequest(
     return null;
   }
 
-  const pathname = new URL(request.url).pathname;
+  const pathname = new URL(request.url).pathname.replace(/\/+$/, '');
 
-  if (pathname.endsWith('/sign-up/email')) {
+  if (pathname === '/api/auth/sign-up/email') {
     return 'signup';
   }
 
-  if (pathname.endsWith('/sign-in/magic-link')) {
+  if (pathname === '/api/auth/sign-in/magic-link') {
     return 'magic-link';
   }
 
@@ -121,7 +121,19 @@ export async function protectBetterAuthRequest(
     requestKind === 'signup'
       ? options.signupProtector
       : options.magicLinkProtector;
-  const decision = await protector.protect(protectedRequest, { email });
+  let decision: BetterAuthDecision;
+
+  try {
+    decision = await protector.protect(protectedRequest, { email });
+  } catch {
+    return Response.json(
+      {
+        code: 'PROTECTION_FAILED',
+        message: 'Unable to validate request.',
+      },
+      { status: 403 },
+    );
+  }
 
   if (!decision.isDenied()) {
     return null;

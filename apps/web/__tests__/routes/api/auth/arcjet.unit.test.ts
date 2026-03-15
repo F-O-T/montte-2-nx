@@ -42,6 +42,24 @@ describe('shouldProtectBetterAuthRequest', () => {
     expect(shouldProtectBetterAuthRequest(request)).toBe('magic-link');
   });
 
+  it('matches protected endpoints with trailing slashes', () => {
+    const signUpRequest = new Request(
+      'https://example.com/api/auth/sign-up/email/',
+      {
+        method: 'POST',
+      },
+    );
+    const magicLinkRequest = new Request(
+      'https://example.com/api/auth/sign-in/magic-link/',
+      {
+        method: 'POST',
+      },
+    );
+
+    expect(shouldProtectBetterAuthRequest(signUpRequest)).toBe('signup');
+    expect(shouldProtectBetterAuthRequest(magicLinkRequest)).toBe('magic-link');
+  });
+
   it('ignores unrelated auth requests', () => {
     const request = new Request('https://example.com/api/auth/sign-in/email', {
       method: 'POST',
@@ -150,6 +168,49 @@ describe('protectBetterAuthRequest', () => {
     await expect(response?.json()).resolves.toEqual({
       code: 'INVALID_REQUEST',
       message: 'Email is required.',
+    });
+  });
+
+  it('rejects malformed JSON bodies for protected requests', async () => {
+    const request = new Request('https://example.com/api/auth/sign-up/email', {
+      body: '}{',
+      headers: { 'content-type': 'application/json' },
+      method: 'POST',
+    });
+
+    const response = await protectBetterAuthRequest(request, {
+      getArcjetRequest: (currentRequest: Request) => currentRequest,
+      magicLinkProtector: { protect: vi.fn() },
+      signupProtector: { protect: vi.fn() },
+    });
+
+    expect(response?.status).toBe(400);
+    await expect(response?.json()).resolves.toEqual({
+      code: 'INVALID_REQUEST',
+      message: 'Email is required.',
+    });
+  });
+
+  it('returns a controlled error response when protector rejects', async () => {
+    const request = new Request('https://example.com/api/auth/sign-up/email', {
+      body: JSON.stringify({ email: 'ada@example.com' }),
+      headers: { 'content-type': 'application/json' },
+      method: 'POST',
+    });
+
+    const response = await protectBetterAuthRequest(request, {
+      getArcjetRequest: (currentRequest: Request) => currentRequest,
+      magicLinkProtector: { protect: vi.fn() },
+      signupProtector: {
+        protect: vi.fn().mockRejectedValue(new Error('boom')),
+      },
+    });
+
+    expect(response).not.toBeNull();
+    expect(response?.status).toBe(403);
+    await expect(response?.json()).resolves.toEqual({
+      code: 'PROTECTION_FAILED',
+      message: 'Unable to validate request.',
     });
   });
 });

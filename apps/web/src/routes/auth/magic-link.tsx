@@ -15,6 +15,7 @@ import { type FormEvent, useCallback, useState } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod';
 import { authClient } from '@web/lib/auth-client';
+import { m } from '@web/paraglide/messages';
 
 export const Route = createFileRoute('/auth/magic-link')({
   component: MagicLinkPage,
@@ -24,7 +25,7 @@ function MagicLinkPage() {
   const [isSent, setIsSent] = useState(false);
 
   const schema = z.object({
-    email: z.email('Please enter a valid email address.'),
+    email: z.email(m.invalid_email()),
   });
 
   const handleMagicLinkSignIn = useCallback(async (email: string) => {
@@ -35,26 +36,31 @@ function MagicLinkPage() {
       },
       {
         onError: ({ error }) => {
-          toast.error(error.message);
+          toast.error(error.message, { id: 'magic-link-sign-in' });
         },
         onRequest: () => {
-          toast.loading('Sending access link...');
+          toast.loading(m.auth_magic_link_sending_access_link(), {
+            id: 'magic-link-sign-in',
+          });
         },
         onSuccess: async () => {
-          try {
-            const res = await fetch(
-              `/api/auth/dev/magic-link?email=${encodeURIComponent(email)}`,
-            );
-            const data = await res.json();
-            if (data.url) {
-              window.location.href = data.url;
-              return;
-            }
-          } catch {
-            // Not in dev mode or endpoint unavailable
+          if (import.meta.env.DEV) {
+            try {
+              const res = await fetch(
+                `/api/auth/dev/magic-link?email=${encodeURIComponent(email)}`,
+              );
+              const data = await res.json();
+              if (data.url) {
+                window.location.href = data.url;
+                return;
+              }
+            } catch {}
           }
+
           setIsSent(true);
-          toast.success('Link sent! Check your email.');
+          toast.success(m.auth_magic_link_sent_toast(), {
+            id: 'magic-link-sign-in',
+          });
         },
       },
     );
@@ -93,11 +99,10 @@ function MagicLinkPage() {
 
           <div className="space-y-2">
             <h1 className="text-3xl font-semibold font-serif">
-              Check your email
+              {m.auth_magic_link_check_email_title()}
             </h1>
             <p className="text-muted-foreground text-sm max-w-sm mx-auto">
-              We sent a link to your email. Click it to access your account
-              instantly.
+              {m.auth_magic_link_check_email_description()}
             </p>
           </div>
 
@@ -107,12 +112,12 @@ function MagicLinkPage() {
               onClick={() => setIsSent(false)}
               variant="outline"
             >
-              Try another email
+              {m.auth_magic_link_try_another_email()}
             </Button>
             <Link to="/auth/sign-in">
               <Button className="w-full" variant="ghost">
                 <ArrowLeft className="size-4" />
-                Back to sign in
+                {m.auth_back_to_sign_in()}
               </Button>
             </Link>
           </div>
@@ -126,17 +131,16 @@ function MagicLinkPage() {
       <Link to="/auth/sign-in">
         <Button className="gap-2 px-0" variant="link">
           <ArrowLeft className="size-4" />
-          Back to sign in
+          {m.auth_back_to_sign_in()}
         </Button>
       </Link>
 
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-semibold font-serif">
-          Passwordless Access
+          {m.auth_magic_link_title()}
         </h1>
         <p className="text-muted-foreground text-sm">
-          Receive a link in your email to access your account without a
-          password.
+          {m.auth_magic_link_description()}
         </p>
       </div>
 
@@ -148,14 +152,14 @@ function MagicLinkPage() {
                 field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                  <FieldLabel htmlFor={field.name}>{m.email()}</FieldLabel>
                   <Input
                     aria-invalid={isInvalid}
                     id={field.name}
                     name={field.name}
                     onBlur={field.handleBlur}
                     onChange={(e) => field.handleChange(e.target.value)}
-                    placeholder="you@email.com"
+                    placeholder={m.auth_email_placeholder()}
                     type="email"
                     value={field.state.value}
                   />
@@ -172,25 +176,28 @@ function MagicLinkPage() {
               disabled={!formState.canSubmit || formState.isSubmitting}
               type="submit"
             >
-              {formState.isSubmitting ? <Spinner /> : 'Send link'}
+              {formState.isSubmitting ? (
+                <Spinner />
+              ) : (
+                m.auth_magic_link_send_cta()
+              )}
             </Button>
           )}
         </form.Subscribe>
       </form>
 
       <FieldDescription className="text-center">
-        The link expires in 15 minutes. Check your spam folder if you don't see
-        the email.
+        {m.auth_magic_link_expiration_note()}
       </FieldDescription>
 
       <div className="text-sm text-center">
         <div className="flex gap-1 justify-center items-center">
-          <span>First time here? </span>
+          <span>{m.auth_first_time_here()}</span>
           <Link
             className="text-primary font-medium hover:underline"
             to="/auth/sign-up"
           >
-            Create account
+            {m.create_account()}
           </Link>
         </div>
       </div>

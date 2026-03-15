@@ -25,7 +25,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from '@packages/ui/components/sidebar';
 import { Skeleton } from '@packages/ui/components/skeleton';
 import { Link, useLocation, useNavigate } from '@tanstack/react-router';
@@ -138,7 +137,6 @@ function SidebarScopeSwitcher() {
   const { data: session } = authClient.useSession();
   const { data: activeOrg } = authClient.useActiveOrganization();
   const { data: organizations } = authClient.useListOrganizations();
-  const { isMobile } = useSidebar();
   const navigate = useNavigate();
   const [isPending, startTransition] = useTransition();
 
@@ -239,7 +237,7 @@ function SidebarScopeSwitcher() {
           <DropdownMenuContent
             align="start"
             className="w-(--radix-dropdown-menu-trigger-width) min-w-72 rounded-lg"
-            side={isMobile ? 'bottom' : 'bottom'}
+            side="bottom"
             sideOffset={4}
           >
             {activeOrg && teams.length > 0 && (

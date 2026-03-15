@@ -79,7 +79,7 @@ function ContextPanelInner() {
 
   const allTabs: ContextPanelTab[] = [
     INFO_TAB,
-    ...dynamicTabs.sort((a, b) => (a.order ?? 99) - (b.order ?? 99)),
+    ...dynamicTabs.slice().sort((a, b) => (a.order ?? 99) - (b.order ?? 99)),
   ];
 
   const activeTab = allTabs.find((t) => t.id === activeTabId) ?? allTabs[0];

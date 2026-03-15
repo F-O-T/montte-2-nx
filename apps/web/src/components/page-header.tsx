@@ -38,7 +38,12 @@ export function PageHeader({
 
       <div className="hidden sm:flex items-center min-w-0 flex-1 max-w-2xl gap-3">
         <SidebarTrigger />
-        <div className={cn('flex flex-col min-w-0', description && 'gap-1.5')}>
+        <div
+          className={cn(
+            'flex flex-col min-w-0',
+            description != null && 'gap-1.5',
+          )}
+        >
           <h1 className="text-2xl font-semibold font-serif leading-tight">
             {title}
           </h1>

@@ -1,5 +1,6 @@
 declare module '@web/paraglide/messages' {
   export * from '../paraglide/messages.js';
+  export { m } from '../paraglide/messages.js';
 }
 
 declare module '@web/paraglide/runtime' {
